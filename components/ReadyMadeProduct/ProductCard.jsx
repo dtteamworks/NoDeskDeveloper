@@ -1,110 +1,143 @@
-import React from "react";
-import { Share2, ExternalLink, IndianRupee, Sparkles } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+"use client";
+import { Share2, Play, ShoppingCart, Monitor, Smartphone } from "lucide-react";
+import { useState } from "react";
+import { ProductDialogBox } from "../ProductDioalogBox";
 
 const ProductCard = ({ filteredProducts }) => {
+  // shareProduct function
+  const shareProduct = (product) => {
+    if (navigator.share) {
+      navigator.share({
+        title: product.name,
+        text: product.description,
+        url: window.location.href,
+      });
+    } else {
+      alert(`Share ${product.name}`);
+    }
+  };
+  const [openProduct, setOpenProduct] = useState(null);
+
+  const handleBuyNow = (product) => {
+    alert(`Purchasing ${product.name} for ₹${product.price}`);
+  };
+
   return (
-    <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+    <div className="max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredProducts.map((product) => (
-          <div key={product.id}
-            className="group relative bg-linear-to-br from-blue-900/40 via-sky-900/30 to-teal-900/40 backdrop-blur-3xl rounded-3xl overflow-hidden border border-blue-500/40 shadow-2xl shadow-black/50 hover:shadow-2xl hover:shadow-blue-700/70  transition-all duration-700 hover:scale-[1.01] hover:-translate-y-5 cursor-pointer">
-            {/* Floating Glow */}
-            <div className="absolute inset-0 bg-linear-to-br from-blue-600/30 via-sky-600/20 to-teal-600/20 opacity-0 group-hover:opacity-100 blur-3xl transition-opacity duration-1000 -z-10" />
-            {/* Screenshot */}
-            <div className="relative h-64 overflow-hidden">
-              <Image
-                src={product.screenshots[0] || product.screenshots}
+          <div
+            key={product.id}
+            className="group relative bg-linear-to-br from-slate-900/90 via-blue-900/50 to-slate-900/90 backdrop-blur-xl rounded-3xl overflow-hidden border border-slate-700/50 hover:border-blue-500/50 shadow-xl hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-500 hover:scale-[1.02] hover:-translate-y-2"
+          >
+            {/* Animated linear overlay */}
+            <div className="absolute inset-0 bg-linear-to-br from-blue-500/0 via-purple-500/0 to-blue-500/0 group-hover:from-blue-500/10 group-hover:via-purple-500/5 group-hover:to-blue-500/10 transition-all duration-700 pointer-events-none" />
+
+            {/* Image Section */}
+            <div className="relative h-48 overflow-hidden bg-slate-800/50">
+              <img
+                src={product.screenshots[0]}
                 alt={product.name}
-                fill
-                className="object-cover group-hover:scale-125 transition-transform duration-1000"
-                unoptimized
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent" />
-              <div className="absolute top-4 right-4">
-                <button
-                  onClick={() => shareProduct(product)}
-                  className="p-3 bg-white/10 backdrop-blur-xl rounded-2xl hover:bg-white/20 transition-all hover:scale-110 hover:cursor-pointer"
-                >
-                  <Share2 className="size-5" />
-                </button>
-              </div>
+              <div className="absolute inset-0 bg-linear-to-t from-slate-900 via-slate-900/40 to-transparent" />
+
+              {/* Share button */}
+              <button
+                onClick={() => shareProduct(product)}
+                className="absolute top-4 right-4 p-2.5 bg-slate-800/80 backdrop-blur-md rounded-xl hover:bg-slate-700/80 transition-all duration-300 hover:scale-110 hover:rotate-12 border border-slate-600/50"
+                aria-label="Share product"
+              >
+                <Share2 className="w-4 h-4 text-slate-200" />
+              </button>
             </div>
 
-            <div className="p-6 space-y-2.5">
-              {/* Title + Category Badge */}
-              <div className="flex items-start justify-between gap-2">
-                <h3 className="text-2xl text-nowrap truncate font-black text-white tracking-tight leading-tight">
+            {/* Content Section */}
+            <div className="p-6 space-y-4">
+              {/* Title and Category */}
+              <div className="flex items-start justify-between gap-3">
+                <h3 className="text-xl font-bold text-white leading-tight line-clamp-2 flex-1">
                   {product.name}
                 </h3>
-                <span className=" text-xs font-bold px-3 py-2 text-nowrap bg-linear-to-r from-blue-600/60 to-sky-600/60 rounded-full text-white border border-blue-400/50">
+                <span className="text-xs font-semibold px-3 py-1.5 bg-linear-to-r from-blue-500/20 to-purple-500/20 rounded-full text-blue-300 border border-blue-400/30 whitespace-nowrap">
                   {product.category}
                 </span>
               </div>
 
-              <p className="text-blue-200  text-sm leading-relaxed font-medium">
+              {/* Description */}
+              <p className="text-slate-300 text-sm leading-relaxed line-clamp-2">
                 {product.description}
               </p>
 
-              {/* Tech & Platforms */}
-              <div className="space-y-4">
-                {/* Platforms */}
-                {/* <div className="flex items-center gap-4">
-                  <div className="flex gap-3">
-                    {product.platforms.includes("Web") && (
-                      <Globe className="size-5 text-blue-400" />
+              {/* Platforms */}
+              <div className="flex items-center gap-2">
+                {product.platforms.map((platform) => (
+                  <div
+                    key={platform}
+                    className="flex items-center gap-1.5 px-2.5 py-1 bg-slate-800/50 rounded-lg border border-slate-700/50"
+                  >
+                    {platform === "Web" ? (
+                      <Monitor className="w-3.5 h-3.5 text-slate-400" />
+                    ) : (
+                      <Smartphone className="w-3.5 h-3.5 text-slate-400" />
                     )}
-                    {product.platforms.includes("Android") && (
-                      <Smartphone className="size-5 text-green-400" />
-                    )}
-                    {product.platforms.includes("iOS") && (
-                      <Smartphone className="size-5 text-blue-400" />
-                    )}
+                    <span className="text-xs text-slate-400 font-medium">
+                      {platform}
+                    </span>
                   </div>
-                  <span className="text-blue-300 font-medium">
-                    {product.platforms.join(" • ")}
-                  </span>
-                </div> */}
+                ))}
+              </div>
 
-                <p className="text-sm">
-                  <span className="text-blue-400 font-medium">
-                    Tech Stack:
+              {/* Tech Stack */}
+              <div className="flex flex-wrap gap-1.5">
+                {product.tech.split(", ").map((tech) => (
+                  <span
+                    key={tech}
+                    className="text-xs px-2 py-1 bg-slate-800/60 text-slate-300 rounded-md border border-slate-700/50"
+                  >
+                    {tech}
                   </span>
-                  <span className="ml-2 font-bold text-white">
-                    {product.tech}
-                  </span>
-                </p>
+                ))}
               </div>
 
               {/* Pricing */}
-              <div className="pt-3 border-t border-blue-500/30 flex justify-between items-center">
-                <div className="flex items-center">
-                  <IndianRupee className="size-7 text-green-400" />
-                  <span className="text-3xl font-black text-white">
-                    {product.price}
-                  </span>
+              <div className="pt-4 border-t border-slate-700/50 space-y-2">
+                <div className="flex justify-between items-center flex-col w-full *:w-full *:flex *:justify-between *:items-center space-y-1">
+                  <div>
+                    <p className="text-xs text-slate-400 mb-0.5">One-time</p>
+                    <p className="text-2xl font-black text-white">
+                      ₹{product.price}
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xs text-slate-400 mb-0.5">
+                      Customization
+                    </p>
+                    <p className="text-sm font-bold text-slate-300">
+                      {product.customization}
+                    </p>
+                  </div>
                 </div>
-                <p className="text-sm text-blue-300">
-                  Customization:{" "}
-                  <span className="font-bold text-white">
-                    {product.customization}
-                  </span>
-                </p>
               </div>
 
-              {/* CTA Buttons */}
-              <div className="flex gap-4 pt-2 text-sm">
-                {/* Demo BTN */}
-                <Link href={product.demoLink} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-3 bg-white/10 hover:bg-white/15 border border-blue-500/60 py-2 rounded-2xl font-bold transition-all hover:scale-105 active:scale-95" >
-                  <ExternalLink className="size-5 transition-all duration-200 ease-in" />
-                  <span>Demo</span>
-                </Link>
-                {/* Buy Now BTN */}
-                <button className="flex-1 cursor-pointer relative overflow-hidden bg-linear-to-r from-blue-600 via-sky-600 to-teal-600 py-4 rounded-2xl font-black text-white shadow-2xl shadow-sky-600/70 hover:shadow-sky-500/90 transition-all hover:scale-105 active:scale-95 group/btn" onClick={()=> alert("Hey Congrat's 😃")}>
-                  <span className="absolute inset-0 bg-white/20 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000" />
-                  <span className="relative flex items-center justify-center gap-3">
-                    <Sparkles className="size-5 animate-pulse" />
+              {/* Action Buttons */}
+              <div className="flex gap-3 pt-2">
+                <button
+                  onClick={() => setOpenProduct(product)}
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-slate-800/50 hover:bg-slate-700/50 border border-slate-600/50 hover:border-blue-500/50 rounded-xl font-semibold text-sm text-white transition-all duration-300 hover:scale-105 active:scale-95"
+                >
+                  <Play className="w-4 h-4" />
+                  <span className="hidden md:block">Request Demo</span>
+                  <span className="md:hidden">Request</span>
+                </button>
+
+                <button
+                  onClick={() => handleBuyNow(product)}
+                  className="flex-1 relative overflow-hidden px-4 py-3 bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 rounded-xl font-bold text-sm text-white shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-300 hover:scale-105 active:scale-95 group/buy"
+                >
+                  <span className="absolute inset-0 bg-white/20 -translate-x-full group-hover/buy:translate-x-full transition-transform duration-700" />
+                  <span className="relative flex items-center justify-center gap-2">
+                    <ShoppingCart className="w-4 h-4" />
                     <span>Buy Now</span>
                   </span>
                 </button>
@@ -113,7 +146,8 @@ const ProductCard = ({ filteredProducts }) => {
           </div>
         ))}
       </div>
-    </>
+      <ProductDialogBox product={openProduct} isOpen={!!openProduct} onClose={() => setOpenProduct(null)} />
+    </div>
   );
 };
 
