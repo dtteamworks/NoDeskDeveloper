@@ -24,6 +24,10 @@ export default function ReportIssueModal({ onClose }) {
       submittedAt: new Date().toISOString(),
     });
     onClose();
+
+    setTimeout(() => {
+      alert("Thank you for reporting the issue! Our team will get back to you soon.");
+    }, 1000);
   };
 
   return (
@@ -38,7 +42,7 @@ export default function ReportIssueModal({ onClose }) {
         >
           <button
             onClick={onClose}
-            className="absolute top-6 right-6  rounded-full bg-white/10 hover:bg-white/20 transition"
+            className="absolute top-6 right-6  rounded-full bg-white/10 hover:bg-white/20 transition p-2"
           >
             <X className="size-6 text-gray-400" />
           </button>
