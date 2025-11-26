@@ -9,6 +9,8 @@ import {
   startingSteps,
   whyChooseUs,
 } from "./SlidesData";
+import { techLogos } from "../Loop/Data";
+import LogoLoop from "../Loop/LogoLoop";
 
 export default function HomePage() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -44,9 +46,10 @@ export default function HomePage() {
         <section className="relative">
           <MotivationalCarousel />
         </section>
+        {/* Loop Of Logos of Teck */}
 
         {/* Why Choose Us - Premium Grid */}
-        <section className="py-16 px-6 bg-linear-to-b from-transparent via-blue-900/10 to-transparent">
+        <section className="py-16 pb-8 px-6 bg-linear-to-b from-transparent via-blue-900/10 to-transparent">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-5xl md:text-6xl sm:pb-2 font-black text-center bg-linear-to-r from-blue-400 to-sky-400 bg-clip-text text-transparent mb-16">
               Why Choose{" "}
@@ -78,6 +81,10 @@ export default function HomePage() {
                   </p>
                 </div>
               ))}
+            </div>
+            <div className="max-w-[90vw] md:max-w-6xl mx-auto  px-4 py-0 rounded-3xl drop-shadow-md border-white/40 mt-8 flex justify-center items-center " style={{ height: "100px", position: "relative", overflow: "hidden", }}>
+              {/* Basic horizontal loop */}
+              <LogoLoop logos={techLogos} speed={120} direction="left" logoHeight={48} gap={40} hoverSpeed={0} scaleOnHover fadeOut fadeOutColor="#0000" ariaLabel="Technology partners" />
             </div>
           </div>
         </section>
@@ -158,7 +165,8 @@ export default function HomePage() {
               <span className="bg-linear-to-r from-blue-400 via-cyan-400 to-sky-400 bg-clip-text text-transparent">
                 Start Talent in
                 <span className="bg-linear-to-tl  from-blue-600 via-sky-500 to-teal-600 text-transparent bg-clip-text">
-                  {" "}60 Seconds
+                  {" "}
+                  60 Seconds
                 </span>
               </span>
             </h2>
