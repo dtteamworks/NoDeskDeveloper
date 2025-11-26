@@ -24,6 +24,10 @@ export default function EstimateModal({ onClose }) {
       submittedAt: new Date().toISOString(),
     });
     onClose();
+
+    setTimeout(() => {
+      alert("Thank you for requesting an estimate! We will get back to you soon.");
+    }, 1000);
   };
 
   return (

@@ -10,7 +10,7 @@ export const slides = [
       "Handpicked talent. Verified skills. Delivered on time — every time.",
     highlight: "Zero Risk. Full Control.",
     image:
-      "https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=1920&h=1080&fit=crop",
+      "https://images.pexels.com/photos/10508800/pexels-photo-10508800.jpeg",
   },
   {
     title: "Launch in Days, Not Months",
