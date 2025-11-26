@@ -26,6 +26,10 @@ export default function SupportRequestModal({ onClose }) {
       submittedAt: new Date().toISOString(),
     });
     onClose();
+
+    setTimeout(() => {
+      alert("Support request submitted successfully!");
+    }, 1000);
   };
 
   return (
@@ -59,10 +63,10 @@ export default function SupportRequestModal({ onClose }) {
                 }
                 className="mt-2 w-full px-5 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-white focus:outline-none focus:border-blue-400 transition"
               >
-                <option>App</option>
-                <option>Website</option>
-                <option>Backend</option>
-                <option>DevOps</option>
+                <option className="bg-black">App</option>
+                <option className="bg-black">Website</option>
+                <option className="bg-black">Backend</option>
+                <option className="bg-black">DevOps</option>
               </select>
             </div>
 
