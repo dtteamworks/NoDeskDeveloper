@@ -113,6 +113,6 @@ export const timelineSteps = [
       { icon: BugIcon, label: "Bugfix" },
     ],
     color: "from-sky-500 to-blue-500",
-    iconBg: "##6ccf5c",
+    iconBg: "#6ccf5c",
   },
 ];
