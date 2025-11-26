@@ -46,7 +46,7 @@ export default function FinalCards() {
   ];
 
   return (
-    <div className="w-full bg-gradient-to-b from-black via-gray-950 to-black py-16 px-5">
+    <div className="w-full bg-linear-to-b from-black via-gray-950 to-black py-16 px-5">
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-3 gap-6">
           {features.map((feature, idx) => {
@@ -55,15 +55,15 @@ export default function FinalCards() {
               <div key={idx} className="relative group">
                 {/* Hover Glow */}
                 <div
-                  className={`absolute -inset-1 bg-gradient-to-r ${feature.iconBg} rounded-2xl opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500`}
+                  className={`absolute -inset-1 bg-linear-to-r ${feature.iconBg} rounded-2xl opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500`}
                 />
 
                 {/* Card */}
-                <div className="relative h-full bg-gradient-to-b from-white/10 to-white/5 backdrop-blur-xl border border-blue-500/30 rounded-2xl p-6 hover:border-blue-500/50 transition-all duration-300">
+                <div className="relative h-full bg-linear-to-b from-white/10 to-white/5 backdrop-blur-xl border border-blue-500/30 rounded-2xl p-6 hover:border-blue-500/50 transition-all duration-300">
                   {/* Icon & Title */}
                   <div className="flex items-start gap-3 mb-4">
                     <div
-                      className={`p-2.5 bg-gradient-to-r ${feature.iconBg} rounded-xl shrink-0`}
+                      className={`p-2.5 bg-linear-to-r ${feature.iconBg} rounded-xl shrink-0`}
                     >
                       <Icon className="w-5 h-5 text-white" strokeWidth={2.5} />
                     </div>
