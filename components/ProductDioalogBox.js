@@ -258,7 +258,7 @@ export const ProductDialogBox = ({ product, isOpen, onClose }) => {
                 </button>
                 <button
                   onClick={handleSubmit}
-                  className="flex-1 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 rounded-xl font-bold text-white shadow-lg shadow-purple-500/30 transition"
+                  className="flex-1 py-3 bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 rounded-xl font-bold text-white shadow-lg shadow-purple-500/30 transition"
                 >
                   Request Demo
                 </button>
