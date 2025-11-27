@@ -1,15 +1,7 @@
 import React, { useState } from "react";
-import {
-  Star,
-  Clock,
-  IndianRupee,
-  Sparkles,
-  BadgeCheck,
-  Calendar,
-  Award,
-  X,
-} from "lucide-react";
+import { Star, Clock, IndianRupee, Sparkles, BadgeCheck, Calendar, Award, X, } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const DevCard = ({ filteredDevelopers }) => {
   const [selectedDeveloper, setSelectedDeveloper] = useState(null);
@@ -21,16 +13,9 @@ const DevCard = ({ filteredDevelopers }) => {
     description: "",
   });
 
-  const projectTypes = [
-    "Web App",
-    "Mobile App",
-    "E-commerce",
-    "Landing Page",
-    "Dashboard",
-    "API Development",
-    "Full Stack Project",
-    "Other",
-  ];
+  const projectTypes = [ "Web App", "Mobile App", "E-commerce", "Landing Page", "Dashboard", "API Development", "Full Stack Project", "Other", ];
+
+  const router = useRouter()
 
   const handleBookClick = (developer) => {
     setSelectedDeveloper(developer);
@@ -182,9 +167,7 @@ const DevCard = ({ filteredDevelopers }) => {
                 <div className="flex flex-col items-center p-2 bg-purple-900/30 rounded-xl border border-purple-500/30">
                   <Award className="size-4 text-purple-400 mb-1" />
                   <span className="text-xs text-purple-300">Level</span>
-                  <span className="text-sm font-bold text-white">
-                    {dev.level}
-                  </span>
+                  <span className="text-sm font-bold text-white">{dev.level}</span>
                 </div>
               </div>
 
@@ -208,14 +191,11 @@ const DevCard = ({ filteredDevelopers }) => {
               {/* Action Buttons */}
               <div className="flex gap-3">
                 <div className="flex-1">
-                  <button
-                    onClick={() => handleBookClick(dev)}
-                    className="w-full px-4 py-2 bg-linear-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all"
-                  >
+                  <button onClick={()=> router.push(`/developers/${dev.id}`)} className="w-full px-4 py-2 bg-linear-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all">
                     Book Developer
                   </button>
                 </div>
-                <button className="px-4 py-2 bg-transparent border border-blue-500/50 text-white rounded-lg hover:bg-blue-900/30 transition-colors">
+                <button onClick={() => handleBookClick(dev)} className="px-4 py-2 bg-transparent border border-blue-500/50 text-white rounded-lg hover:bg-blue-900/30 transition-colors">
                   Enquire
                 </button>
               </div>
