@@ -1,13 +1,11 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { Star, ArrowRight, Sparkles } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { Star} from "lucide-react";
 
 export default function Testimonials() {
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollRef = useRef(null);
-  const pathname = usePathname();
 
   const testimonials = [
     {
@@ -136,10 +134,10 @@ export default function Testimonials() {
             </div>
 
             {/* Progress Dots */}
-            <div className={`flex justify-center gap-2 mb-0 ${ pathname === "/" ? "hidden" : "" }`} >
+            {/* <div className={`flex justify-center gap-2 mb-0 ${ pathname === "/" ? "hidden" : "" }`} >
               {testimonials.map((_, index) => (
                 <button  key={index}  onClick={() => setActiveIndex(index)}  className={`h-2 rounded-full transition-all duration-300 ${ index === activeIndex ? "w-8 bg-linear-to-r from-blue-500 to-purple-500" : "w-2 bg-white/20 hover:bg-white/30" }`} />  ))}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
