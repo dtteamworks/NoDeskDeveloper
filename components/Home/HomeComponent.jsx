@@ -9,6 +9,7 @@ import LogoLoop from "../Loop/LogoLoop";
 import ServicesVerticalBar from "../ServicesVertical/ServicesVerticalBar";
 import TestimonialsComponent from "../Testimonials/TestimonialsComponent";
 import DevNsoftwareComponent from "./DevNsoftwareComponent";
+import PricingPage from "../Pricing/PricingPage";
 
 export default function HomePage() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -81,7 +82,7 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-<DevNsoftwareComponent />
+        <DevNsoftwareComponent />
         {/* Quick Navigation Tiles */}
         <section className="py-10 pt-8 px-6">
           <div className="max-w-7xl mx-auto">
@@ -129,9 +130,27 @@ export default function HomePage() {
               </span>
             </h2>
             {/* Loop Of Logos of Teck */}
-            <div className="max-w-[90vw] md:max-w-5xl mb-16 mx-auto  px-4 py-0 rounded-3xl drop-shadow-md border-white/40 mt-8 flex justify-center items-center " style={{ height: "100px", position: "relative", overflow: "hidden", }} >
+            <div
+              className="max-w-[90vw] md:max-w-5xl mb-16 mx-auto  px-4 py-0 rounded-3xl drop-shadow-md border-white/40 mt-8 flex justify-center items-center "
+              style={{
+                height: "100px",
+                position: "relative",
+                overflow: "hidden",
+              }}
+            >
               {/* Basic horizontal loop */}
-              <LogoLoop logos={techLogos} speed={120} direction="left" logoHeight={48} gap={40} hoverSpeed={0} scaleOnHover fadeOut fadeOutColor="#0000" ariaLabel="Technology partners" />
+              <LogoLoop
+                logos={techLogos}
+                speed={120}
+                direction="left"
+                logoHeight={48}
+                gap={40}
+                hoverSpeed={0}
+                scaleOnHover
+                fadeOut
+                fadeOutColor="#0000"
+                ariaLabel="Technology partners"
+              />
             </div>
 
             {/* {services.map((service) => (
@@ -154,15 +173,13 @@ export default function HomePage() {
             <ServicesVerticalBar />
           </div>
         </section>
-{/* ===================================================================================================================== */}
+        {/* ===================================================================================================================== */}
 
-      <TestimonialsComponent />
+        <TestimonialsComponent />
 
-
-
-{/* ===================================================================================================================== */}
+        {/* ===================================================================================================================== */}
         {/* Quick Get Started Tiles */}
-        <section className="py-4 sm:py-12 md:py-16 lg:py-20  px-6">
+        <section className="py-4 sm:py-12 md:py-16 lg:py-20 pb-0 px-6">
           <div className="max-w-7xl mx-auto text-center">
             <h2 className="text-5xl md:text-6xl font-black mb-16">
               <span className="bg-linear-to-r from-blue-400 via-cyan-400 to-sky-400 bg-clip-text text-transparent">
@@ -194,22 +211,20 @@ export default function HomePage() {
               ))}
             </div>
           </div>
-          <section className="py-24 pb-12 px-6 text-center">
+          <section className="py-24 pb-0 px-6 text-center">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-4xl md:text-6xl font-black bg-linear-to-r from-blue-400 via-sky-400 to-teal-400 bg-clip-text text-transparent mb-8">
                 Ready to Build Something Amazing?
               </h2>
-              <Link
-                href="/book-services"
-                className="inline-flex items-center gap-4 px-12 py-7 bg-linear-to-r text-nowrap from-blue-600 via-sky-600 to-teal-600 rounded-2xl font-black text-lg shadow-2xl shadow-sky-600/70 hover:shadow-sky-500/90 transition-all duration-500 hover:scale-110 active:scale-95"
-              >
+              <Link href="/book-services" className="inline-flex items-center gap-4 px-12 py-7 bg-linear-to-r text-nowrap from-blue-600 via-sky-600 to-teal-600 rounded-2xl font-black text-lg shadow-2xl shadow-sky-600/70 hover:shadow-sky-500/90 transition-all duration-500 hover:scale-110 active:scale-95" >
                 Start Now! It’s Free
                 <Sparkles className="size-6 md:size-7 group-hover:animate-pulse" />
               </Link>
             </div>
           </section>
-          {/* Bottom CTA */}
         </section>
+        {/* Pricing Page Component */}
+        <PricingPage />
       </div>
     </>
   );

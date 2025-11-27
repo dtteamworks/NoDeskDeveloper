@@ -1,10 +1,13 @@
 "use client";
 import { Share2, Play, ShoppingCart, Monitor, Smartphone } from "lucide-react";
 import { useState } from "react";
-import { ProductDialogBox } from "../ProductDioalogBox";
+import { ProductDialogBox } from "../DialogBoxes/ProductDioalogBox";
+import { RequestDemoDialog } from "../DialogBoxes/RequestDemoDialog";
 
 const ProductCard = ({ filteredProducts }) => {
-  // shareProduct function
+  const [openProduct, setOpenProduct] = useState(null);
+  const [demoProduct, setDemoProduct] = useState(null); // Add this state
+
   const shareProduct = (product) => {
     if (navigator.share) {
       navigator.share({
@@ -16,10 +19,9 @@ const ProductCard = ({ filteredProducts }) => {
       alert(`Share ${product.name}`);
     }
   };
-  const [openProduct, setOpenProduct] = useState(null);
 
   const handleRequestDemo = (product) => {
-    alert(`Purchasing ${product.name} for ₹${product.price}`);
+    setDemoProduct(product); // Open demo dialog instead of alert
   };
 
   return (
@@ -132,8 +134,7 @@ const ProductCard = ({ filteredProducts }) => {
                 </button>
 
                 <button
-                                    onClick={() => setOpenProduct(product)}
-
+                  onClick={() => setOpenProduct(product)}
                   className="flex-1 relative overflow-hidden px-4 py-3 bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 rounded-xl font-bold text-sm text-white shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-300 hover:scale-105 active:scale-95 group/buy"
                 >
                   <span className="absolute inset-0 bg-white/20 -translate-x-full group-hover/buy:translate-x-full transition-transform duration-700" />
@@ -147,7 +148,20 @@ const ProductCard = ({ filteredProducts }) => {
           </div>
         ))}
       </div>
-      <ProductDialogBox product={openProduct} isOpen={!!openProduct} onClose={() => setOpenProduct(null)} />
+
+      {/* Buy Now Dialog */}
+      <ProductDialogBox
+        product={openProduct}
+        isOpen={!!openProduct}
+        onClose={() => setOpenProduct(null)}
+      />
+
+      {/* Request Demo Dialog */}
+      <RequestDemoDialog
+        product={demoProduct}
+        isOpen={!!demoProduct}
+        onClose={() => setDemoProduct(null)}
+      />
     </div>
   );
 };

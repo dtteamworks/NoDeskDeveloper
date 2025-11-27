@@ -1,4 +1,17 @@
-import { Building2, Code2, CreditCard, Crown, GraduationCap, HeadphonesIcon, MessageCircle, Package, Rocket, Users, Wrench, Zap } from "lucide-react";
+import {
+  Building2,
+  Code2,
+  CreditCard,
+  Crown,
+  GraduationCap,
+  HeadphonesIcon,
+  MessageCircle,
+  Package,
+  Rocket,
+  Users,
+  Wrench,
+  Zap,
+} from "lucide-react";
 
 // About PAge Services
 export const aboutServices = [
@@ -121,7 +134,6 @@ export const softwareProducts = [
   },
 ];
 
-
 // ============================================================================
 // ========================= Developer Tiers ==================================
 // ============================================================================
@@ -130,7 +142,6 @@ export const developerTiers = [
     level: "Junior Developer",
     icon: Code2,
     price: "₹300 – ₹500",
-    period: "per hour",
     description: "Perfect for basic web development and simple projects",
     technologies: [
       "HTML5",
@@ -154,7 +165,6 @@ export const developerTiers = [
     level: "Mid-Level Developer",
     icon: Zap,
     price: "₹600 – ₹1000",
-    period: "per hour",
     description: "Ideal for full-stack applications and modern frameworks",
     technologies: [
       "React",
@@ -179,7 +189,6 @@ export const developerTiers = [
     level: "Senior Developer",
     icon: Crown,
     price: "₹1200+",
-    period: "per hour",
     description: "Enterprise solutions with advanced tech stack",
     technologies: [
       "MERN Stack",

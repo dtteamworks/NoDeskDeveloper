@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Home, Code2, Mail, Menu, X, Sparkles, FolderCode, BookAudio, IndianRupee } from "lucide-react";
+import { Home, Code2, Mail, Menu, X, Sparkles, FolderCode, BookAudio } from "lucide-react";
 import Link from "next/link";
 
 const navLinks = [
@@ -9,7 +9,6 @@ const navLinks = [
   { name: "Softwares", href: "/softwares-readymade", icon: FolderCode  },
   { name: "Book Services", href: "/book-services", icon: FolderCode  },
   { name: "About", href: "/about", icon: BookAudio   },
-  { name: "Pricing", href: "/pricing", icon: IndianRupee   },
   { name: "Contact", href: "/contact", icon: Mail },
 ];
 

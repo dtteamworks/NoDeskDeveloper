@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import {
-  Sparkles,
   Check,
   ArrowRight,
   Rocket,
@@ -11,13 +10,16 @@ import {
 } from "lucide-react";
 import { developerTiers, softwareProducts } from "@/components/Data";
 import BottomCTAButton from "@/components/MiniComponents/BottomCTAButton";
+import { useRouter } from "next/navigation";
 
 export default function PricingPage() {
   const [activeTab, setActiveTab] = useState("developers");
   const [hoveredCard, setHoveredCard] = useState(null);
 
+  const router = useRouter();
+
   return (
-    <div className="min-h-screen bg-linear-to-b from-black via-gray-950 to-black py-20 px-5 lg:px-8">
+    <div className=" bg-linear-to-b from-black via-gray-950 to-black py-0 px-5 lg:px-8">
       {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
@@ -30,13 +32,6 @@ export default function PricingPage() {
       <div className="relative max-w-[1350px] mx-auto">
         {/* Header Section */}
         <div className="text-center mb-16 space-y-6">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/30 backdrop-blur-xl">
-            <Sparkles className="w-4 h-4 text-blue-400" />
-            <span className="text-sm font-semibold text-blue-400">
-              Transparent Pricing
-            </span>
-          </div>
-
           <h1 className="text-5xl md:text-6xl font-black bg-linear-to-r from-blue-400 via-sky-400 to-teal-400 bg-clip-text text-transparent leading-tight">
             Choose Your Perfect Plan
           </h1>
@@ -148,12 +143,9 @@ export default function PricingPage() {
                         <span
                           className={`text-4xl font-black bg-linear-to-r ${tier.color} bg-clip-text text-transparent`}
                         >
-                          {tier.price}
+                          {tier.price}/hr
                         </span>
                       </div>
-                      <span className="text-gray-500 text-sm">
-                        {tier.period}
-                      </span>
                     </div>
 
                     {/* Technologies */}
@@ -190,6 +182,7 @@ export default function PricingPage() {
 
                     {/* CTA Button */}
                     <button
+                      onClick={() => router.push("developers")}
                       className={`w-full group/btn relative px-6 py-4 bg-linear-to-r ${tier.color} rounded-2xl font-bold text-white overflow-hidden shadow-2xl hover:shadow-sky-500/50 transition-all duration-400 hover:scale-105 active:scale-95`}
                     >
                       <span className="absolute inset-0 bg-white/20 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000" />
@@ -284,6 +277,7 @@ export default function PricingPage() {
 
                     {/* CTA Button */}
                     <button
+                      onClick={() => router.push("/softwares-readymade")}
                       className={`w-full group/btn relative px-6 py-4 bg-linear-to-r ${software.color} rounded-2xl font-bold text-white overflow-hidden shadow-2xl hover:shadow-sky-500/50 transition-all duration-400 hover:scale-105 active:scale-95`}
                     >
                       <span className="absolute inset-0 bg-white/20 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000" />
