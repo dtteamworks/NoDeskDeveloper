@@ -29,10 +29,7 @@ export default function DevelopersSoftwareSection() {
               <h2 className="text-2xl md:text-3xl font-black text-white">
                 Top Developers
               </h2>
-              <Link
-                href="/developers"
-                className="group/link flex items-center gap-2 text-purple-400 hover:text-purple-300 font-semibold transition-colors"
-              >
+              <Link href="/developers" className="group/link flex items-center gap-2 text-purple-400 hover:text-purple-300 font-semibold transition-colors" >
                 View all
                 <ArrowRight className="w-5 h-5 group-hover/link:translate-x-1 transition-transform" />
               </Link>
@@ -41,14 +38,9 @@ export default function DevelopersSoftwareSection() {
             {/* Developer Cards Grid */}
             <div className="grid md:grid-cols-2 gap-4">
               {developers.slice(0, 4).map((profile, idx) => (
-                <div
-                  key={idx}
-                  className="group/card space-y-4 relative bg-white/2 hover:bg-white/5 border border-white/10 hover:border-blue-500/30 rounded-2xl p-5 transition-all duration-300 hover:scale-[1.02]"
-                >
+                <div key={idx} className="group/card space-y-4 relative bg-white/2 hover:bg-white/5 border border-white/10 hover:border-blue-500/30 rounded-2xl p-5 transition-all duration-300 hover:scale-[1.02]" >
                   <div className="flex justify-between  ">
-                    <h3 className="text-white font-bold text-lg">
-                      {profile.name}
-                    </h3>
+                    <h3 className="text-white font-bold text-lg">{profile.name}</h3>
                     <span className="text-[10px] font-semibold text-blue-400 bg-blue-900/50 flex justify-center items-center h-fit px-2 py-1 rounded-full">
                       {profile.experience} years+
                     </span>
@@ -57,16 +49,10 @@ export default function DevelopersSoftwareSection() {
                     {/* Skills */}
                     <span className="space-x-1 mt-2 flex-wrap flex-3">
                       {profile.skills.slice(0, 2).map((skill) => (
-                        <span
-                          key={skill}
-                          className="text-gray-300  gap-1 text-[10px] bg-slate-700/50 px-2 py-1 rounded-full"
-                        >
+                        <span key={skill} className="text-gray-300  gap-1 text-[10px] bg-slate-700/50 px-2 py-1 rounded-full" >
                           {skill}
                         </span>
-                      ))}{" "}
-                      <span
-                        className="text-gray-300  gap-1 text-[10px] bg-slate-700/50 px-2 py-1 rounded-full"
-                      >{Math.floor(Math.random()*10)}+</span>
+                      ))}
                     </span>
 
                     {/* Rate */}
