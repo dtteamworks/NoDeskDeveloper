@@ -3,11 +3,7 @@ import { useState, useEffect } from "react";
 import { ArrowUpRight, Sparkles, TrendingUp, Zap, ZapIcon } from "lucide-react";
 import Link from "next/link";
 import MotivationalCarousel from "./CorousalComponent";
-import {
-  getStartedLinks,
-  startingSteps,
-  whyChooseUs,
-} from "./SlidesData";
+import { getStartedLinks, startingSteps, whyChooseUs } from "./SlidesData";
 import { techLogos } from "../Loop/Data";
 import LogoLoop from "../Loop/LogoLoop";
 import ServicesVerticalBar from "../ServicesVertical/ServicesVerticalBar";
@@ -46,7 +42,6 @@ export default function HomePage() {
         <section className="relative">
           <MotivationalCarousel />
         </section>
-        {/* Loop Of Logos of Teck */}
 
         {/* Why Choose Us - Premium Grid */}
         <section className="py-16 pb-8 px-6 bg-linear-to-b from-transparent via-blue-900/10 to-transparent">
@@ -82,7 +77,6 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
-           
           </div>
         </section>
 
@@ -132,13 +126,13 @@ export default function HomePage() {
                 for Any Service
               </span>
             </h2>
-            {/* Logo Loop  Component Here */}
-             <div className="max-w-[90vw] md:max-w-5xl mb-16 mx-auto  px-4 py-0 rounded-3xl drop-shadow-md border-white/40 mt-8 flex justify-center items-center " style={{ height: "100px", position: "relative", overflow: "hidden", }}>
+            {/* Loop Of Logos of Teck */}
+            <div className="max-w-[90vw] md:max-w-5xl mb-16 mx-auto  px-4 py-0 rounded-3xl drop-shadow-md border-white/40 mt-8 flex justify-center items-center " style={{ height: "100px", position: "relative", overflow: "hidden", }} >
               {/* Basic horizontal loop */}
               <LogoLoop logos={techLogos} speed={120} direction="left" logoHeight={48} gap={40} hoverSpeed={0} scaleOnHover fadeOut fadeOutColor="#0000" ariaLabel="Technology partners" />
             </div>
 
-              {/* {services.map((service) => (
+            {/* {services.map((service) => (
                 <Link
                   href="/developers"
                   key={service.title}
@@ -156,7 +150,7 @@ export default function HomePage() {
                 </Link>
               ))} */}
             <ServicesVerticalBar />
-            </div>
+          </div>
         </section>
 
         {/* Quick Get Started Tiles */}
@@ -206,8 +200,7 @@ export default function HomePage() {
               </Link>
             </div>
           </section>
-           {/* Bottom CTA */}
-        
+          {/* Bottom CTA */}
         </section>
       </div>
     </>
