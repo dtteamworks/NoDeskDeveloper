@@ -77,7 +77,7 @@ export default function DevCard({ developer }) {
 
         {/* View Details Button */}
         <Link
-          href={`/admin/alldevelopers/${_id}`}
+          href={`/admin/all-developers/${_id}`}
           className="mt-6 py-2 w-full rounded-full flex items-center justify-center gap-2 bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-semibold  transition-all duration-300 shadow-lg hover:shadow-blue-500/25"
         >
           <Eye className="w-4 h-4" />
