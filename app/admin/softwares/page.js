@@ -15,6 +15,7 @@ export default function AllSoftwaresPage() {
       try {
         const res = await fetch(`${API_BASE}/projects`, { cache: "no-store" });
         const result = await res.json();
+        console.log("Fetched softwares:", result);
 
         if (result.success) {
           setSoftwares(result.data);
