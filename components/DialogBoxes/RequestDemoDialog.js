@@ -1,4 +1,4 @@
-import { X } from "lucide-react";
+import { X, User, Phone, Mail, Briefcase, Globe, Clock } from "lucide-react";
 import { useState } from "react";
 
 export const RequestDemoDialog = ({ product, isOpen, onClose }) => {
@@ -19,7 +19,6 @@ export const RequestDemoDialog = ({ product, isOpen, onClose }) => {
   };
 
   const handleSubmit = () => {
-    // Validation
     if (
       !formData.name ||
       !formData.phone ||
@@ -56,122 +55,151 @@ export const RequestDemoDialog = ({ product, isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-in fade-in duration-300">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 blur-xl backdrop-blur-sm"
+        className="absolute inset-0 bg-black/80 backdrop-blur-xl"
         onClick={onClose}
       />
 
       {/* Dialog */}
-      <div className="relative w-full min-w-5xl max-w-md bg-linear-to-br from-slate-900 via-gray-900/50 to-gray-900 border border-blue-500/30 rounded-3xl shadow-2xl shadow-blue-500/20 overflow-hidden max-h-[90vh] overflow-y-auto">
+      <div className="relative w-full max-w-2xl bg-black/60 backdrop-blur-2xl border border-blue-500/30 rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto animate-in zoom-in-95 duration-300">
+        {/* Glow Effect */}
+        <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 via-sky-500 to-teal-400 rounded-3xl blur opacity-20" />
+        
         {/* Header */}
-        <div className="relative p-6 border-b border-slate-700/50">
-          <h2 className="text-2xl font-bold text-white">Request Demo</h2>
-          <p className="text-sm text-slate-400 mt-1">
-            {product?.name || "Product Demo"}
-          </p>
-          <button
-            onClick={onClose}
-            className="absolute top-6 right-6 p-2 bg-slate-800 hover:bg-slate-700/50 rounded-xl transition-all duration-300 hover:rotate-90"
-          >
-            <X className="w-5 h-5 text-slate-300" />
-          </button>
+        <div className="relative p-6 border-b border-blue-500/20 bg-gradient-to-r from-blue-600/10 via-sky-600/10 to-teal-500/10">
+          <div className="flex items-start justify-between">
+            <div>
+              <h2 className="text-3xl font-black bg-gradient-to-r from-blue-400 via-sky-400 to-teal-400 bg-clip-text text-transparent">
+                Request Demo
+              </h2>
+              <p className="text-blue-300/70 text-sm mt-1 font-medium">
+                {product?.name || "Get started with our product"}
+              </p>
+            </div>
+            <button
+              onClick={onClose}
+              className="p-2.5 bg-white/5 hover:bg-red-500/20 border border-blue-500/30 hover:border-red-500/50 rounded-xl transition-all duration-300 hover:rotate-90 group"
+            >
+              <X className="w-5 h-5 text-blue-300 group-hover:text-red-400 transition-colors" />
+            </button>
+          </div>
         </div>
 
         {/* Form */}
-        <div className="p-6 space-y-4">
-          {/* Name */}
-          <div className="flex justify-between gap-4">
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full px-4 py-3 bg-slate-800 border border-slate-700/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
-              placeholder="Enter your name"
-            />
+        <div className="relative p-6 space-y-5">
+          {/* Name & Phone Row */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="relative group/input">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <User className="w-5 h-5 text-blue-400/60 group-hover/input:text-blue-400 transition-colors" />
+              </div>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                className="w-full pl-12 pr-4 py-3.5 bg-white/5 border border-blue-500/30 rounded-2xl text-white placeholder-blue-300/40 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-300 hover:bg-white/10"
+                placeholder="Your name"
+              />
+            </div>
 
-            {/* Phone */}
-            <input
-              type="tel"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              className="w-full px-4 py-3 bg-slate-800 border border-slate-700/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
-              placeholder="Enter your phone number"
-            />
+            <div className="relative group/input">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <Phone className="w-5 h-5 text-blue-400/60 group-hover/input:text-blue-400 transition-colors" />
+              </div>
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                className="w-full pl-12 pr-4 py-3.5 bg-white/5 border border-blue-500/30 rounded-2xl text-white placeholder-blue-300/40 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-300 hover:bg-white/10"
+                placeholder="Phone number"
+              />
+            </div>
           </div>
 
-          {/* Email */}
-          <div className="flex justify-between gap-4">
-           
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full px-4 py-3 bg-slate-800 border border-slate-700/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
-              placeholder="Enter your email"
-            />
+          {/* Email & Project Type Row */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="relative group/input">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <Mail className="w-5 h-5 text-blue-400/60 group-hover/input:text-blue-400 transition-colors" />
+              </div>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full pl-12 pr-4 py-3.5 bg-white/5 border border-blue-500/30 rounded-2xl text-white placeholder-blue-300/40 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-300 hover:bg-white/10"
+                placeholder="Email address"
+              />
+            </div>
 
-          {/* Project Type */}
-        
-            <select
-              name="projectType"
-              value={formData.projectType}
-              onChange={handleChange}
-              className="w-full px-4 py-3 bg-slate-800 border border-slate-700/50 rounded-xl text-white focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
-            >
-              <option value="">Select project type</option>
-              <option value="website">Website</option>
-              <option value="mobile-app">Mobile App</option>
-              <option value="both">Both (Website & Mobile App)</option>
-              <option value="other">Other</option>
-            </select>
+            <div className="relative group/input">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <Briefcase className="w-5 h-5 text-blue-400/60 group-hover/input:text-blue-400 transition-colors" />
+              </div>
+              <select
+                name="projectType"
+                value={formData.projectType}
+                onChange={handleChange}
+                className="w-full pl-12 pr-4 py-3.5 bg-white/5 border border-blue-500/30 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-300 hover:bg-white/10 appearance-none cursor-pointer"
+              >
+                <option value="" className="bg-gray-900">Select project type</option>
+                <option value="website" className="bg-gray-900">Website</option>
+                <option value="mobile-app" className="bg-gray-900">Mobile App</option>
+                <option value="both" className="bg-gray-900">Both (Website & Mobile App)</option>
+                <option value="other" className="bg-gray-900">Other</option>
+              </select>
+            </div>
           </div>
 
-          {/* Preferred Language */}
-          <div className="flex justify-between gap-4">
-           
-            <select
-              name="preferredLanguage"
-              value={formData.preferredLanguage}
-              onChange={handleChange}
-              className="w-full px-4 py-3 bg-slate-800 border border-slate-700/50 rounded-xl text-white focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
-            >
-              <option value="">Select language</option>
-              <option value="english">English</option>
-              <option value="hindi">Hindi</option>
-              <option value="hinglish">Hinglish</option>
-            </select>
+          {/* Language & Availability Row */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="relative group/input">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <Globe className="w-5 h-5 text-blue-400/60 group-hover/input:text-blue-400 transition-colors" />
+              </div>
+              <select
+                name="preferredLanguage"
+                value={formData.preferredLanguage}
+                onChange={handleChange}
+                className="w-full pl-12 pr-4 py-3.5 bg-white/5 border border-blue-500/30 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-300 hover:bg-white/10 appearance-none cursor-pointer"
+              >
+                <option value="" className="bg-gray-900">Select language</option>
+                <option value="english" className="bg-gray-900">English</option>
+                <option value="hindi" className="bg-gray-900">Hindi</option>
+                <option value="hinglish" className="bg-gray-900">Hinglish</option>
+              </select>
+            </div>
 
-          {/* Availability Time */}
-            
-            <select
-              name="availabilityTime"
-              value={formData.availabilityTime}
-              onChange={handleChange}
-              className="w-full px-4 py-3 bg-slate-800 border border-slate-700/50 rounded-xl text-white focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all"
-            >
-              <option value="">Select time slot</option>
-              <option value="morning">Morning (9 AM - 12 PM)</option>
-              <option value="afternoon">Afternoon (12 PM - 4 PM)</option>
-              <option value="evening">Evening (4 PM - 8 PM)</option>
-              <option value="flexible">Flexible</option>
-            </select>
+            <div className="relative group/input">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <Clock className="w-5 h-5 text-blue-400/60 group-hover/input:text-blue-400 transition-colors" />
+              </div>
+              <select
+                name="availabilityTime"
+                value={formData.availabilityTime}
+                onChange={handleChange}
+                className="w-full pl-12 pr-4 py-3.5 bg-white/5 border border-blue-500/30 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-300 hover:bg-white/10 appearance-none cursor-pointer"
+              >
+                <option value="" className="bg-gray-900">Select time slot</option>
+                <option value="morning" className="bg-gray-900">Morning (9 AM - 12 PM)</option>
+                <option value="afternoon" className="bg-gray-900">Afternoon (12 PM - 4 PM)</option>
+                <option value="evening" className="bg-gray-900">Evening (4 PM - 8 PM)</option>
+                <option value="flexible" className="bg-gray-900">Flexible</option>
+              </select>
+            </div>
           </div>
 
           {/* Submit Button */}
           <button
             onClick={handleSubmit}
-            className="w-full   group mt-6 mx-auto "
+            className="w-full group/btn relative mt-6 px-8 py-4 bg-gradient-to-r from-blue-600 via-sky-500 to-teal-400 rounded-2xl font-bold text-white overflow-hidden shadow-2xl shadow-sky-500/40 hover:shadow-sky-500/70 transition-all duration-400 hover:scale-[1.02] active:scale-95"
           >
-            <div className="w-fit relative cursor-pointer mx-auto overflow-hidden px-8 py-3.5 bg-linear-to-r from-blue-600 via-sky-600 to-teal-600 hover:from-blue-500 hover:to-sky-500 rounded-xl font-bold text-white shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-300 hover:scale-105 active:scale-95">
-
-            <span className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+            <span className="absolute inset-0 bg-white/20 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000" />
             <span className="relative">Submit Request</span>
-            </div>
           </button>
         </div>
       </div>
