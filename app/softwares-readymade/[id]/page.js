@@ -1,17 +1,32 @@
-// app/softwares-readymade/[id]/page.js
-
 "use client";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { API_BASE } from "@/lib/api";
-import { ProductDialogBox } from "@/components/DialogBoxes/ProductDioalogBox";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft, PlayCircle, Copy } from "lucide-react";
 import Link from "next/link";
+import { API_BASE } from "@/lib/api";
 
 export default function ProductDetailPage() {
   const { id } = useParams();
+  const router = useRouter();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  // Form & Addons State
+  const [formData, setFormData] = useState({
+    name: "",
+    contact: "",
+    message: "",
+  });
+
+  const [addons, setAddons] = useState({
+    deployment: false,
+    branding: false,
+    payment: false,
+    gateway: false,
+    customFields: false,
+    multiLanguage: false,
+    whatsapp: false,
+  });
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -33,7 +48,7 @@ export default function ProductDetailPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
-        <p className="text-3xl text-blue-400 font-bold animate-pulse">Loading Product...</p>
+        <p className="text-3xl font-bold text-blue-400 animate-pulse">Loading Product...</p>
       </div>
     );
   }
@@ -46,44 +61,218 @@ export default function ProductDetailPage() {
     );
   }
 
+  const basePrice = product.price;
+
+  const addonsList = [
+    { key: "deployment", label: "Installation & Deployment", cost: product.deployment || 0 },
+    { key: "branding", label: "Branding (logo/colors)", cost: product.branding || 0 },
+    { key: "payment", label: "Payment Gateway", cost: product.payment || 0 },
+    { key: "gateway", label: "Admin Custom Fields", cost: product.gateway || 0 },
+    { key: "multiLanguage", label: "Multi-language", cost: product.multiLanguage || 0 },
+    { key: "whatsapp", label: "WhatsApp Integration", cost: product.whatsapp || 0 },
+  ];
+
+  const selectedAddons = addonsList.filter((addon) => addons[addon.key]);
+  const addonsTotal = selectedAddons.reduce((sum, a) => sum + a.cost, 0);
+  const serviceFee = (basePrice + addonsTotal) * 0.05;
+  const total = basePrice + addonsTotal + serviceFee;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Request Submitted:", {
+      product: product.name,
+      client: formData,
+      selectedAddons,
+      total: Math.round(total),
+    });
+    alert("Request sent successfully! We’ll contact you soon.");
+  };
+
+  const handleCopyQuote = () => {
+    const quote = `${product.name}\nBase: ₹${basePrice}\nAdd-ons: ₹${Math.round(addonsTotal)}\nService Fee: ₹${Math.round(serviceFee)}\nTotal: ₹${Math.round(total)}`;
+    navigator.clipboard.writeText(quote);
+    alert("Quote copied!");
+  };
+
   return (
-    <div className="min-h-screen bg-black text-white pt-24 pb-16 px-6">
+    <div className="min-h-screen bg-black text-white pt-20 pb-16 px-6">
       <div className="max-w-7xl mx-auto">
         {/* Back Button */}
-        <Link href="/softwares-readymade" className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 mb-8 transition">
+        <Link
+          href="/softwares-readymade"
+          className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 mb-8 text-lg font-medium transition"
+        >
           <ArrowLeft className="w-5 h-5" />
           Back to All Apps
         </Link>
 
-        {/* Hero Section */}
-        <div className="text-center mb-12">
-          <h1 className="text-5xl md:text-6xl font-black bg-linear-to-r from-blue-600 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-            {product.name}
-          </h1>
-          <p className="mt-4 text-xl text-gray-300 max-w-4xl mx-auto">
-            {product.description}
-          </p>
-        </div>
-
-        {/* Main Content – Reuse your beautiful ProductDialogBox as full page */}
-        <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl overflow-hidden">
-          <ProductDialogBox product={product} isOpen={true} onClose={() => {}} />
-        </div>
-
-        {/* Demo Link */}
-        {product.demoLink && (
-          <div className="text-center mt-10">
-            <a
-              href={product.demoLink}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl font-bold text-white text-lg hover:scale-105 transition shadow-lg"
-            >
-              <ExternalLink className="w-6 h-6" />
-              Open Live Demo
-            </a>
+        {/* Main Container – Same as Dialog Box */}
+        <div className="bg-slate-900 rounded-3xl max-w-6xl mx-auto overflow-hidden border border-slate-700 shadow-2xl">
+          {/* Header */}
+          <div className="bg-gradient-to-r from-blue-900/50 to-purple-900/50 p-8 border-b border-slate-700">
+            <h1 className="text-4xl md:text-5xl font-black text-white text-center">
+              {product.name}
+            </h1>
+            <p className="text-center text-blue-300 mt-3 text-lg">{product.description}</p>
           </div>
-        )}
+
+          <div className="grid lg:grid-cols-2 gap-8 p-6 md:p-10">
+            {/* Left Side – Images & Info */}
+            <div className="space-y-8">
+              {/* Main Image */}
+              <img
+                src={product.screenshots[0]}
+                alt={product.name}
+                className="w-full h-80 object-cover rounded-2xl shadow-2xl border border-slate-700"
+              />
+
+              {/* Thumbnail Grid */}
+              <div className="grid grid-cols-3 gap-4">
+                {product.screenshots.slice(0, 3).map((img, i) => (
+                  <img
+                    key={i}
+                    src={img}
+                    alt={`Screenshot ${i + 1}`}
+                    className="w-full h-40 object-cover rounded-xl border border-slate-700 hover:border-blue-500 transition"
+                  />
+                ))}
+              </div>
+
+              {/* Platforms */}
+              <div className="flex gap-3 flex-wrap">
+                {product.platforms?.map((p) => (
+                  <span
+                    key={p}
+                    className="flex items-center gap-2 px-4 py-2 bg-slate-800 rounded-lg text-sm font-medium text-slate-300 border border-slate-700"
+                  >
+                    {p === "Web" ? <Monitor className="w-5 h-5" /> : <Smartphone className="w-5 h-5" />}
+                    {p}
+                  </span>
+                ))}
+              </div>
+
+              {/* Tech Stack */}
+              <div className="flex flex-wrap gap-3">
+                {(Array.isArray(product.tech) ? product.tech : product.tech?.split(", ") || []).map((t) => (
+                  <span
+                    key={t}
+                    className="px-4 py-2 bg-slate-800/70 rounded-lg text-sm text-slate-300 border border-slate-700"
+                  >
+                    {t.trim()}
+                  </span>
+                ))}
+              </div>
+
+              {/* Action Links */}
+              <div className="flex gap-6">
+                {product.demoLink && (
+                  <a
+                    href={product.demoLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-3 text-blue-400 hover:text-blue-300 font-semibold text-lg"
+                  >
+                    <PlayCircle className="w-6 h-6" />
+                    Open Live Demo
+                  </a>
+                )}
+                <button
+                  onClick={handleCopyQuote}
+                  className="flex items-center gap-3 text-purple-400 hover:text-purple-300 font-semibold text-lg"
+                >
+                  <Copy className="w-6 h-6" />
+                  Copy Quote
+                </button>
+              </div>
+            </div>
+
+            {/* Right Side – Form & Pricing */}
+            <div className="space-y-8">
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <input
+                  type="text"
+                  placeholder="Your Name *"
+                  required
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="w-full px-5 py-4 bg-slate-800/70 border border-slate-700 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 transition"
+                />
+                <input
+                  type="text"
+                  placeholder="Email or Phone *"
+                  required
+                  value={formData.contact}
+                  onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
+                  className="w-full px-5 py-4 bg-slate-800/70 border border-slate-700 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 transition"
+                />
+                <textarea
+                  placeholder="Tell us about your project (optional)"
+                  rows={4}
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  className="w-full px-5 py-4 bg-slate-800/70 border border-slate-700 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 resize-none transition"
+                />
+              </form>
+
+              {/* Add-ons & Pricing */}
+              <div className="bg-slate-800/50 p-6 rounded-2xl border border-slate-700 space-y-6">
+                <h3 className="text-2xl font-bold text-white">Customize Package</h3>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {addonsList.map((item) => (
+                    <label key={item.key} className="flex items-center gap-4 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={addons[item.key]}
+                        onChange={(e) => setAddons({ ...addons, [item.key]: e.target.checked })}
+                        className="w-5 h-5 rounded accent-purple-500"
+                      />
+                      <span className="text-slate-300">{item.label}</span>
+                    </label>
+                  ))}
+                </div>
+
+                {/* Pricing Breakdown */}
+                <div className="space-y-3 pt-6 border-t border-slate-700">
+                  <div className="flex justify-between text-lg">
+                    <span className="text-slate-400">Base Price</span>
+                    <span className="text-white font-bold">₹{basePrice.toLocaleString()}</span>
+                  </div>
+                  {selectedAddons.length > 0 && (
+                    <div className="flex justify-between text-lg">
+                      <span className="text-slate-400">Add-ons</span>
+                      <span className="text-white font-bold">₹{Math.round(addonsTotal).toLocaleString()}</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between text-lg">
+                    <span className="text-slate-400">Service Fee (5%)</span>
+                    <span className="text-white">₹{Math.round(serviceFee).toLocaleString()}</span>
+                  </div>
+                  <div className="flex justify-between text-2xl font-black pt-4 border-t border-slate-600">
+                    <span className="text-white">Total</span>
+                    <span className="text-purple-400">₹{Math.round(total).toLocaleString()}</span>
+                  </div>
+                </div>
+
+                <div className="flex gap-4 pt-4">
+                  <button
+                    type="button"
+                    onClick={handleCopyQuote}
+                    className="flex-1 py-4 bg-slate-700 hover:bg-slate-600 rounded-xl font-bold text-white transition"
+                  >
+                    Copy Quote
+                  </button>
+                  <button
+                    onClick={handleSubmit}
+                    className="flex-1 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 rounded-xl font-bold text-white shadow-lg shadow-purple-500/50 transition"
+                  >
+                    Send Request
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
