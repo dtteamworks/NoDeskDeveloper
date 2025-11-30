@@ -107,17 +107,15 @@ export default function ProductDetailPage() {
 
   return (
     <div className="min-h-screen bg-black text-white pt-20 pb-20 px-6">
-      <div className="max-w-7xl mx-auto">
-        <Link href="/softwares-readymade" className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 mb-10 text-lg font-medium">
-          <ArrowLeft className="w-5 h-5" /> Back to All Apps
-        </Link>
+      <div className=" mx-auto">
+        
 
         <div className="bg-slate-900 rounded-3xl max-w-6xl mx-auto overflow-hidden border border-slate-700 shadow-2xl">
-          <div className="bg-linear-to-r from-blue-900/40 to-purple-900/40 p-10 text-center border-b border-slate-700">
-            <h1 className="text-5xl md:text-6xl font-black bg-linear-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+          <div className="bg-linear-to-r from-blue-900/40 to-purple-900/40 p-10 border-b border-slate-700">
+            <h1 className="text-xl md:text-6xl font-black bg-linear-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
               {product.name}
             </h1>
-            <p className="mt-4 text-xl text-gray-300 max-w-3xl mx-auto">{product.description}</p>
+            <p className="mt-4 text-sm text-gray-300 max-w-3xl">{product.description}</p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-10 p-8 md:p-12">
@@ -125,7 +123,7 @@ export default function ProductDetailPage() {
             <div className="space-y-8">
               <img src={product.screenshots[0]} alt={product.name} className="w-full h-96 object-cover rounded-2xl border border-slate-700 shadow-xl" />
               <div className="grid grid-cols-3 gap-4">
-                {product.screenshots.slice(1, 4).map((img, i) => (
+                {product.screenshots.slice(0, 4).map((img, i) => (
                   <img key={i} src={img} alt="" className="w-full h-40 object-cover rounded-xl border border-slate-700 hover:border-blue-500 transition" />
                 ))}
               </div>
