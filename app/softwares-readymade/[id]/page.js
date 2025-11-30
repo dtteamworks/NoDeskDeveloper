@@ -1,7 +1,7 @@
 "use client";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ArrowLeft, PlayCircle, Copy } from "lucide-react";
+import { ArrowLeft, PlayCircle, Copy, Smartphone, Monitor } from "lucide-react";
 import Link from "next/link";
 import { API_BASE } from "@/lib/api";
 
@@ -75,7 +75,6 @@ export default function ProductDetailPage() {
   const selectedAddons = addonsList.filter((addon) => addons[addon.key]);
   const addonsTotal = selectedAddons.reduce((sum, a) => sum + a.cost, 0);
   const serviceFee = (basePrice + addonsTotal) * 0.05;
-  const total = basePrice + addonsTotal + serviceFee;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -109,7 +108,7 @@ export default function ProductDetailPage() {
         {/* Main Container – Same as Dialog Box */}
         <div className="bg-slate-900 rounded-3xl max-w-6xl mx-auto overflow-hidden border border-slate-700 shadow-2xl">
           {/* Header */}
-          <div className="bg-gradient-to-r from-blue-900/50 to-purple-900/50 p-8 border-b border-slate-700">
+          <div className="bg-linear-to-r from-blue-900/50 to-purple-900/50 p-8 border-b border-slate-700">
             <h1 className="text-4xl md:text-5xl font-black text-white text-center">
               {product.name}
             </h1>
@@ -264,7 +263,7 @@ export default function ProductDetailPage() {
                   </button>
                   <button
                     onClick={handleSubmit}
-                    className="flex-1 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 rounded-xl font-bold text-white shadow-lg shadow-purple-500/50 transition"
+                    className="flex-1 py-4 bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 rounded-xl font-bold text-white shadow-lg shadow-purple-500/50 transition"
                   >
                     Send Request
                   </button>
