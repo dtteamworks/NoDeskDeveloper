@@ -168,7 +168,7 @@ export default function ProductDetailPage() {
 
             <Link
               href="/softwares-readymade"
-              className="absolute top-[40%] hidden  right-10 text-xs border border-white/20 bg-radial-[at_15%_20%] from-sky-900 to-zinc-900 to-35% rounded-full px-4 pt-2 md:inline-flex items-center gap-2 text-slate-400 hover:text-white transition mb-6"
+              className="absolute top-[40%] hidden  right-10 text-xs border border-white/20 px-3 py-2.5 md:inline-flex items-center gap-2 text-white hover:text-white transition-all duration-200 ease-in bg-linear-to-tl from-slate-900 via-slate-700 to-slate-600"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to Apps
