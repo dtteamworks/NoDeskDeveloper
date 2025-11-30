@@ -84,7 +84,7 @@ export default function DevelopersPage() {
       <div className="max-w-7xl mx-auto">
         {/* Hero */}
         <div className="text-center mb-12">
-          <h1 className="text-5xl md:text-6xl font-black bg-gradient-to-r from-blue-600 via-sky-500 to-teal-400 bg-clip-text text-transparent mb-4">
+          <h1 className="text-5xl md:text-6xl font-black bg-linear-to-r from-blue-600 via-sky-500 to-teal-400 bg-clip-text text-transparent mb-4">
             Hire Verified Developers
           </h1>
           <p className="text-xl text-blue-300/80 font-medium">
@@ -124,7 +124,7 @@ export default function DevelopersPage() {
                 onClick={() => setSelectedLevel(level)}
                 className={`px-4 py-1.5 rounded-full text-sm transition-all ${
                   selectedLevel === level
-                    ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white"
+                    ? "bg-linear-to-r from-blue-600 to-purple-600 text-white"
                     : "bg-white/5 text-gray-300 hover:bg-white/10"
                 }`}
               >
