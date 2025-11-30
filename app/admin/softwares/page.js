@@ -13,7 +13,7 @@ export default function AllSoftwaresPage() {
   useEffect(() => {
     const fetchSoftwares = async () => {
       try {
-        const res = await fetch(`${API_BASE}/projects`, { cache: "no-store" });
+        const res = await fetch(`${API_BASE}/projects`);
         const result = await res.json();
         console.log("Fetched softwares:", result);
 
