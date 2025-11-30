@@ -3,8 +3,8 @@
 import { useState, useMemo, useEffect } from "react";
 import { Search } from "lucide-react";
 import DevCard from "./DevCard";
+import { API_BASE } from "@/lib/api";
 
-const API_BASE = "https://your-backend.onrender.com/api"; // ← apna Render URL daal dena
 
 const techOptions = [
   "All", "React", "Next.js", "Flutter", "Laravel", "Node.js", "Python", 
