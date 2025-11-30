@@ -19,7 +19,7 @@ export default function ReadyMadeSoftwarePage() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch(`${API_BASE}/developers`);
+        const res = await fetch(`${API_BASE}/projects`);
         const result = await res.json();
         console.log("Fetched products:", result);
         if (result.success) {
