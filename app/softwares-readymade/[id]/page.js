@@ -169,9 +169,9 @@ export default function ProductDetailPage() {
                 <h3 className="text-2xl font-bold mb-6">Customize Your Package</h3>
                 <div className="space-y-4">
                   {addonsList.map(item => (
-                    <label key={item.key} className="flex items-center justify-between cursor-pointer py-2">
+                    <label key={item.key} className="flex items-center justify-between cursor-pointer py-2 text-xs">
                       <span className="text-slate-300">{item.label}</span>
-                      <input type="checkbox" checked={addons[item.key]} onChange={e => setAddons({ ...addons, [item.key]: e.target.checked })} className="w-5 h-5 rounded accent-purple-500" />
+                      <input type="checkbox" checked={addons[item.key]} onChange={e => setAddons({ ...addons, [item.key]: e.target.checked })} className="size-4 rounded accent-purple-500" />
                     </label>
                   ))}
                 </div>
