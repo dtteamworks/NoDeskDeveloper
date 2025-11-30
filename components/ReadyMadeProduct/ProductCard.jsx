@@ -1,12 +1,12 @@
 "use client";
 import { Share2, Play, ShoppingCart, Monitor, Smartphone } from "lucide-react";
 import { useState } from "react";
-import { ProductDialogBox } from "../DialogBoxes/ProductDioalogBox";
 import { RequestDemoDialog } from "../DialogBoxes/RequestDemoDialog";
+import { useRouter } from "next/navigation";
 
 const ProductCard = ({ filteredProducts }) => {
-  const [openProduct, setOpenProduct] = useState(null);
   const [demoProduct, setDemoProduct] = useState(null);
+  const router = useRouter()
 
   const shareProduct = (product) => {
     if (navigator.share) {
@@ -102,7 +102,7 @@ const ProductCard = ({ filteredProducts }) => {
                 </button>
 
                 <button
-                  onClick={() => setOpenProduct(product)}
+                  onClick={() => router.push(`/softwares-readymade/${product._id}`)}
                   className="flex-1 relative overflow-hidden px-4 py-3 bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 rounded-xl font-bold text-sm text-white shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-300 hover:scale-105 active:scale-95 group/buy"
                 >
                   <span className="absolute inset-0 bg-white/20 -translate-x-full group-hover/buy:translate-x-full transition-transform duration-700" />
@@ -117,7 +117,6 @@ const ProductCard = ({ filteredProducts }) => {
         ))}
       </div>
 
-      <ProductDialogBox product={openProduct} isOpen={!!openProduct} onClose={() => setOpenProduct(null)} />
       <RequestDemoDialog product={demoProduct} isOpen={!!demoProduct} onClose={() => setDemoProduct(null)} />
     </div>
   );

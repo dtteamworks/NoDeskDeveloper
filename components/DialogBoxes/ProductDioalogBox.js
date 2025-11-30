@@ -21,21 +21,44 @@ export const ProductDialogBox = ({ product, isOpen, onClose }) => {
   if (!isOpen) return null;
 
   const basePrice = product.price;
-  
+
   // Calculate addon costs from product data
   const addonsList = [
-    { key: "deployment", label: "Installation & Deployment", cost: product.deployment || 0 },
-    { key: "branding", label: "Branding (logo/colors)", cost: product.branding || 0 },
+    {
+      key: "deployment",
+      label: "Installation & Deployment",
+      cost: product.deployment || 0,
+    },
+    {
+      key: "branding",
+      label: "Branding (logo/colors)",
+      cost: product.branding || 0,
+    },
     { key: "payment", label: "Payment Gateway", cost: product.payment || 0 },
-    { key: "gateway", label: "Admin Custom Fields", cost: product.gateway || 0 },
-    { key: "multiLanguage", label: "Multi-language", cost: product.multiLanguage || 0 },
-    { key: "whatsapp", label: "WhatsApp Integration", cost: product.whatsapp || 0 },
+    {
+      key: "gateway",
+      label: "Admin Custom Fields",
+      cost: product.gateway || 0,
+    },
+    {
+      key: "multiLanguage",
+      label: "Multi-language",
+      cost: product.multiLanguage || 0,
+    },
+    {
+      key: "whatsapp",
+      label: "WhatsApp Integration",
+      cost: product.whatsapp || 0,
+    },
   ];
 
-  const selectedAddons = addonsList.filter(addon => addons[addon.key]);
-  const addonsTotal = selectedAddons.reduce((sum, addon) => sum + addon.cost, 0);
+  const selectedAddons = addonsList.filter((addon) => addons[addon.key]);
+  const addonsTotal = selectedAddons.reduce(
+    (sum, addon) => sum + addon.cost,
+    0
+  );
   const hasSelectedAddons = selectedAddons.length > 0;
-  
+
   const serviceFee = (basePrice + addonsTotal) * 0.05;
   const total = basePrice + addonsTotal + serviceFee;
 
@@ -44,7 +67,10 @@ export const ProductDialogBox = ({ product, isOpen, onClose }) => {
     console.log("Demo Request Submitted:", {
       product: product.name,
       client: formData,
-      selectedAddons: selectedAddons.map(a => ({ name: a.label, cost: a.cost })),
+      selectedAddons: selectedAddons.map((a) => ({
+        name: a.label,
+        cost: a.cost,
+      })),
       pricing: {
         base: basePrice,
         addonsTotal: Math.round(addonsTotal),
@@ -56,7 +82,9 @@ export const ProductDialogBox = ({ product, isOpen, onClose }) => {
   };
 
   const handleCopyQuote = () => {
-    const quote = `${product.name}\nBase: ₹${basePrice}\nAdd-ons: ₹${Math.round(addonsTotal)}\nTotal: ₹${Math.round(total)}`;
+    const quote = `${product.name}\nBase: ₹${basePrice}\nAdd-ons: ₹${Math.round(
+      addonsTotal
+    )}\nTotal: ₹${Math.round(total)}`;
     navigator.clipboard.writeText(quote);
     alert("Quote copied to clipboard!");
   };
@@ -112,12 +140,15 @@ export const ProductDialogBox = ({ product, isOpen, onClose }) => {
             </div>
 
             <div className="flex flex-wrap gap-2">
-              {product.tech.split(", ").map((t) => (
+              {(Array.isArray(product.tech)
+                ? product.tech
+                : product.tech?.split(", ") || []
+              ).map((t) => (
                 <span
                   key={t}
                   className="text-xs px-3 py-1.5 bg-slate-800/70 rounded-md text-slate-400"
                 >
-                  {t}
+                  {t.trim()}
                 </span>
               ))}
             </div>
@@ -179,7 +210,7 @@ export const ProductDialogBox = ({ product, isOpen, onClose }) => {
                 Customize Your Package
               </h3>
 
-               <div className="grid grid-cols-2 gap-3 text-sm">
+              <div className="grid grid-cols-2 gap-3 text-sm">
                 {[
                   { key: "deployment", label: "Installation & Deployment" },
                   { key: "branding", label: "Branding (logo/colors)" },
@@ -207,9 +238,14 @@ export const ProductDialogBox = ({ product, isOpen, onClose }) => {
 
               {hasSelectedAddons && (
                 <div className="space-y-3 pt-4 border-t border-slate-700">
-                  <h4 className="text-sm font-semibold text-slate-300">Selected Add-ons:</h4>
+                  <h4 className="text-sm font-semibold text-slate-300">
+                    Selected Add-ons:
+                  </h4>
                   {selectedAddons.map((addon) => (
-                    <div key={addon.key} className="flex justify-between text-sm">
+                    <div
+                      key={addon.key}
+                      className="flex justify-between text-sm"
+                    >
                       <span className="text-slate-400">{addon.label}</span>
                       <span className="text-white font-medium">
                         ₹{addon.cost.toLocaleString()}
