@@ -24,14 +24,17 @@ export default function AdminLayout({ children }) {
 
   const handleLogout = async () => {
     try {
-      await fetch(`${API_BASE}/logout`, {
+     const res =  await fetch(`${API_BASE}/logout`, {
         method: "POST",
         credentials: "include",
       });
-      router.push("/login");
+      if(res.ok){
+        alert("Logged Out Successfully")
+        router.push("/");
+      }
     } catch (error) {
       console.error("Logout error:", error);
-      router.push("/login");
+      router.push("/");
     }
   };
 
