@@ -56,7 +56,7 @@ export default function Dashboard() {
             Welcome!{" "}
             <span className="bg-linear-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
               {" "}
-              {currentUser.email.split("@")[0]}
+              {currentUser?.email.split("@")[0]}
             </span>{" "}
             😃
           </h1>
