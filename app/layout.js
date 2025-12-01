@@ -3,6 +3,7 @@ import "./globals.css";
 import FloatingLinearOrb from "@/components/FloatingLinearOrb";
 import FooterComponent from "@/components/Footer";
 import FollowCursor from "@/components/MiniComponents/FollowCursor";
+import TawkToChat from "@/components/TawkToChat";
 
 export const metadata = {
   title: "NoDeskDeveloper - Connect, Build, Grow",
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
           <FloatingLinearOrb />
           {children}
           <FooterComponent />
+          <TawkToChat />
         </>
       </body>
     </html>
