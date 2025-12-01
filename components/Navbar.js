@@ -1,15 +1,25 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Home, Code2, Mail, Menu, X, Sparkles, FolderCode, BookAudio } from "lucide-react";
+import {
+  Home,
+  Code2,
+  Mail,
+  Menu,
+  X,
+  Sparkles,
+  FolderCode,
+  BookAudio,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { API_BASE } from "@/lib/api";
 
 const navLinks = [
   { name: "Home", href: "/", icon: Home },
   { name: "Hire Developers", href: "/developers", icon: Code2 },
-  { name: "Softwares", href: "/softwares-readymade", icon: FolderCode  },
-  { name: "Book Services", href: "/book-services", icon: FolderCode  },
-  { name: "About", href: "/about", icon: BookAudio   },
+  { name: "Softwares", href: "/softwares-readymade", icon: FolderCode },
+  { name: "Book Services", href: "/book-services", icon: FolderCode },
+  { name: "About", href: "/about", icon: BookAudio },
   { name: "Contact", href: "/contact", icon: Mail },
 ];
 
@@ -17,8 +27,12 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [active, setActive] = useState("Home");
-  const pathname = usePathname()
-  const router = useRouter()
+  const [user, setUser] = useState(null); // ← ye add kar
+  const [loading, setLoading] = useState(true); // ← ye bhi add kar (optional but good)
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -26,9 +40,36 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/me`, {
+          credentials: "include", // ← ye bahut zaroori hai cookie ke liye
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          setUser(data.user); // backend me { success: true, user: {email, role, ...} } aana chahiye
+        }
+      } catch (err) {
+        console.log("Not logged in");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkUser();
+  }, []);
+
   return (
     <>
-      <nav className={`z-50 border-b border-blue-300/70 transition-all duration-500 ${scrolled ? "bg-black/80 backdrop-blur-2xl border-b border-blue-500/30 shadow-xl shadow-blue-900/50": "bg-transparent"} ${pathname.startsWith('/admin') ? 'hidden' : ''}`}>
+      <nav
+        className={`z-50 border-b border-blue-300/70 transition-all duration-500 ${
+          scrolled
+            ? "bg-black/80 backdrop-blur-2xl border-b border-blue-500/30 shadow-xl shadow-blue-900/50"
+            : "bg-transparent"
+        } ${pathname.startsWith("/admin") ? "hidden" : ""}`}
+      >
         <div className="max-w-[1500px] mx-auto px-5 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
@@ -61,7 +102,11 @@ export default function Navbar() {
                   <span
                     className={`absolute inset-0 bg-linear-to-r from-blue-600/0 via-sky-600/0 to-blue-600/0 
                     group-hover:from-blue-600/20 group-hover:via-sky-600/30 group-hover:to-blue-600/20 
-                    transition-all duration-500 ${active === name ? "from-blue-600/30 via-sky-600/40 to-blue-600/30" : ""}`}
+                    transition-all duration-500 ${
+                      active === name
+                        ? "from-blue-600/30 via-sky-600/40 to-blue-600/30"
+                        : ""
+                    }`}
                   />
                   {active === name && (
                     <span className="absolute inset-0 bg-linear-to-r from-blue-500 via-sky-500 to-teal-500 rounded-2xl blur-xl opacity-60 animate-pulse" />
@@ -74,26 +119,86 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* CTA Button Here... */}
-            <div className="hidden md:block">
-              <button onClick={()=> router.push("/auth/me")} className="group relative px-8 py-3.5 cursor-pointer bg-linear-to-r from-blue-600 via-sky-500 to-teal-400  rounded-2xl font-bold text-white overflow-hidden shadow-2xl shadow-sky-500/40 hover:shadow-sky-500/70 transition-all duration-400 hover:scale-105 active:scale-95">
-                <span className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                <span className="relative flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 group-hover:animate-pulse" />
-                  Get Started
-                </span>
-              </button>
+            {/* Desktop - Profile or Get Started */}
+            <div className="hidden md:block relative">
+              {user ? (
+                <div className="relative">
+                  <button
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                    className="flex items-center gap-3 px-6 py-3.5 bg-linear-to-r from-blue-600 via-sky-500 to-teal-400 rounded-2xl font-bold text-white shadow-2xl hover:shadow-sky-500/70 transition-all duration-300"
+                  >
+                    <Sparkles className="w-5 h-5" />
+                    Hello! {user.email.split("@")[0]}
+                  </button>
+
+                  {/* Dropdown */}
+                  {dropdownOpen && (
+                    <div className="absolute right-0 mt-3 w-64 bg-black/95 backdrop-blur-2xl border border-blue-500/40 rounded-2xl shadow-2xl overflow-hidden z-50">
+                      <div className="p-5 border-b border-blue-500/30">
+                        <p className="text-sm text-blue-300">Signed in as</p>
+                        <p className="font-bold text-white">{user.email}</p>
+                      </div>
+                      <div className="p-3 space-y-2">
+                        <button
+                          onClick={() => {
+                            setDropdownOpen(false);
+                            router.push(
+                              user.role === "admin" ? "/admin" : "/dashboard"
+                            );
+                          }}
+                          className="w-full text-left px-5 py-3 rounded-xl bg-blue-600/30 hover:bg-blue-600/50 text-white font-medium transition"
+                        >
+                          Dashboard
+                        </button>
+                        <button
+                          onClick={async () => {
+                            await fetch(`${API_BASE}/logout`, {
+                              method: "POST",
+                              credentials: "include",
+                            });
+                            setUser(null);
+                            setDropdownOpen(false);
+                            router.push("/");
+                          }}
+                          className="w-full text-left px-5 py-3 rounded-xl bg-red-600/30 hover:bg-red-600/50 text-white font-medium transition"
+                        >
+                          Logout
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <button
+                  onClick={() => router.push("/auth/login")}
+                  className="group relative px-8 py-3.5 bg-linear-to-r from-blue-600 via-sky-500 to-teal-400 rounded-2xl font-bold text-white overflow-hidden shadow-2xl shadow-sky-500/40 hover:shadow-sky-500/70 transition-all duration-400 hover:scale-105 active:scale-95"
+                >
+                  <span className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                  <span className="relative flex items-center gap-2">
+                    <Sparkles className="w-5 h-5 group-hover:animate-pulse" />
+                    Get Started
+                  </span>
+                </button>
+              )}
             </div>
 
             {/* Mobile Menu Toggle Hree...... */}
-            <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden p-3 rounded-xl bg-white/5 hover:bg-white/10 backdrop-blur-xl border border-blue-500/30 text-white transition-all duration-300">
-              {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="md:hidden p-3 rounded-xl bg-white/5 hover:bg-white/10 backdrop-blur-xl border border-blue-500/30 text-white transition-all duration-300"
+            >
+              {mobileOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
             </button>
           </div>
         </div>
 
         {/* Mobile Menu - Sleek & Smooth */}
-        <div className={`md:hidden overflow-hidden transition-all duration-500 ease-out ${
+        <div
+          className={`md:hidden overflow-hidden transition-all duration-500 ease-out ${
             mobileOpen ? "opacity-100" : "max-h-0 opacity-0"
           }`}
         >
@@ -116,10 +221,47 @@ export default function Navbar() {
                 <span>{name}</span>
               </Link>
             ))}
-            <button onClick={()=> router.push("/auth/me")} className="w-full mt-4 py-4 bg-linear-to-r from-blue-600 via-sky-500 to-teal-400  rounded-2xl font-bold text-white shadow-2xl shadow-sky-600/60 flex items-center justify-center gap-3 hover:shadow-sky-500/80 transition-all duration-300 active:scale-95">
-              <Sparkles className="w-5 h-5" />
-              Get Started Now
-            </button>
+            {user ? (
+              <div className="px-5 py-4 bg-linear-to-r from-blue-600/30 to-sky-600/30 rounded-2xl">
+                <p className="text-sm text-blue-200">
+                  Hello, {user.email.split("@")[0]}!
+                </p>
+                <div className="mt-3 space-y-2">
+                  <button
+                    onClick={() =>
+                      router.push(
+                        user.role === "admin" ? "/admin" : "/dashboard"
+                      )
+                    }
+                    className="w-full py-3 bg-blue-600/50 hover:bg-blue-600/70 rounded-xl font-medium"
+                  >
+                    Dashboard
+                  </button>
+                  <button
+                    onClick={async () => {
+                      await fetch(`${API_BASE}/logout`, {
+                        method: "POST",
+                        credentials: "include",
+                      });
+                      setUser(null);
+                      setMobileOpen(false);
+                      router.push("/");
+                    }}
+                    className="w-full py-3 bg-red-600/50 hover:bg-red-600/70 rounded-xl font-medium"
+                  >
+                    Logout
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <button
+                onClick={() => router.push("/auth/login")}
+                className="w-full mt-4 py-4 bg-linear-to-r from-blue-600 via-sky-500 to-teal-400 rounded-2xl font-bold text-white shadow-2xl flex items-center justify-center gap-3"
+              >
+                <Sparkles className="w-5 h-5" />
+                Get Started Now
+              </button>
+            )}
           </div>
         </div>
       </nav>
