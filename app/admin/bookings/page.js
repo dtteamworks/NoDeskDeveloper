@@ -10,6 +10,9 @@ const BookingsPage = () => {
         <button onClick={() => router.push("/admin/bookings/dev-bookings")}>
           Dev Bookings
         </button>
+        <button onClick={() => router.push("/admin/bookings/dev-enquiries")}>
+          Dev Enquires
+        </button>
       </div>
     </>
   );

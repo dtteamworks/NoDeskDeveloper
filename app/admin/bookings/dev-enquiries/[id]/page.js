@@ -252,7 +252,7 @@ export default function EnquiryDetail() {
                   </>
                 ) : (
                   <>
-                    <Trash className="size-3" />
+                    <Trash className="size-4" />
                     Delete Enquiry
                   </>
                 )}
