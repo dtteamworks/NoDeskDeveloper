@@ -95,7 +95,7 @@ export default function EnquiryDetail() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
+      <div className="min-h-[90vh] bg-black flex items-center justify-center">
         <div className="text-center">
           <div className="inline-block size-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-4"></div>
           <p className="text-white text-xl">Loading enquiry details...</p>
