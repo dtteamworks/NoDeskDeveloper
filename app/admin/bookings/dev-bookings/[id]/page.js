@@ -107,7 +107,7 @@ export default function BookingDetail() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Booking Card */}
-          <div className="relative bg-gradient-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-xl border border-white/10 rounded-3xl p-8 overflow-hidden">
+          <div className="relative bg-linear-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-xl border border-white/10 rounded-3xl p-8 overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl" />
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
 
@@ -154,7 +154,7 @@ export default function BookingDetail() {
           </div>
 
           {/* Project & Status Card */}
-          <div className="relative bg-gradient-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-xl border border-white/10 rounded-3xl p-8 overflow-hidden">
+          <div className="relative bg-linear-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-xl border border-white/10 rounded-3xl p-8 overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl" />
 
@@ -204,7 +204,7 @@ export default function BookingDetail() {
                 <button
                   onClick={handleUpdateStatus}
                   disabled={updating || newStatus === booking.status}
-                  className={`w-full py-3 flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-xl transition-all shadow-lg ${
+                  className={`w-full py-3 flex items-center justify-center gap-2 bg-linear-to-r from-blue-600 to-purple-600 text-white font-medium rounded-xl transition-all shadow-lg ${
                     updating || newStatus === booking.status
                       ? "opacity-80 cursor-not-allowed"
                       : "hover:from-blue-500 hover:to-purple-500 shadow-blue-500/40"
