@@ -48,7 +48,7 @@ export default function DemoRequestDetail() {
       const data = await res.json();
       if (data.success) {
         setRequest(data.data);
-        alert("Status updated successfully!");
+        alert("Status Updated Successfully!");
       } else {
         alert(data.message || "Update failed");
       }

@@ -19,7 +19,7 @@ export default function AdminRequestProductDemo() {
         if (data.success) {
           setRequests(data.data);
         } else {
-          setError("Failed to load demo requests");
+          setError("Failed to load demo requests.");
         }
       } catch (err) {
         setError("Network error");
