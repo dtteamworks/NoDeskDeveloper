@@ -194,7 +194,7 @@ const DevCard = ({ filteredDevelopers }) => {
               {/* Action Buttons */}
               <div className="flex gap-3">
                 <div className="flex-1">
-                  <button onClick={() => router.push(`/developers/${dev._id}`)} className="w-full px-4 py-2 bg-linear-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all">
+                  <button onClick={() => router.push(`/developers/${dev?._id}`)} className="w-full px-4 py-2 bg-linear-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all">
                     Book Developer
                   </button>
                 </div>
