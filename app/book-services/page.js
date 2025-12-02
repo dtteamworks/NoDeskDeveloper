@@ -19,12 +19,6 @@ import Link from "next/link";
 
 const services = [
   {
-    icon: Globe,
-    title: "All Our Services",
-    tags: ["Dev", "Ops", "Sec"],
-    link: "/book-services",
-  },
-  {
     icon: Users,
     title: "Hire Developers",
     tags: ["Dev", "Ops", "Sec"],
