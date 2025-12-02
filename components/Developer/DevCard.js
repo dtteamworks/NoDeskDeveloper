@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Star, Clock, IndianRupee, Sparkles, BadgeCheck, Calendar, Award, X, } from "lucide-react";
+import { Star, Clock, IndianRupee, Sparkles, BadgeCheck, Calendar, Award, X, Languages, } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -117,7 +117,7 @@ const DevCard = ({ filteredDevelopers }) => {
                     </div> */}
                   </div>
 
-                  <p className="text-sm text-blue-300 mt-1">Remote • India</p>
+                  <p className="text-xs text-blue-300 mt-1">{dev?.state} • {dev?.country}</p>
 
                   {/* Level Badge */}
                   <span
@@ -166,11 +166,11 @@ const DevCard = ({ filteredDevelopers }) => {
                   </span>
                 </div>
 
-                {/* Level */}
+                {/* Preferred Language */}
                 <div className="flex flex-col items-center p-2 bg-purple-900/30 rounded-xl border border-purple-500/30">
-                  <Award className="size-4 text-purple-400 mb-1" />
-                  <span className="text-xs text-purple-300">Level</span>
-                  <span className="text-sm font-bold text-white">{dev.level}</span>
+                  <Languages className="size-4 text-purple-400 mb-1" />
+                  <span className="text-xs text-purple-300">Language</span>
+                  <span className="text-sm font-bold text-white">{dev?.preferredLanguage}</span>
                 </div>
               </div>
 
