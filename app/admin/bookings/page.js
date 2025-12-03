@@ -79,7 +79,7 @@ export default function ServicesGrid() {
                   <div className={` absolute inset-0 bg-linear-to-br from-cyan-500/5 to-blue-500/5 transition-opacity duration-500 `}/>
                   <div className="relative z-10">
                     {/* Title */}
-                    <h3 className="text-white font-semibold text-base leading-snug mb-4">
+                    <h3 className="text-white font-semibold text-base leading-snug">
                       {service.title}
                     </h3>
                   </div>
