@@ -1,9 +1,7 @@
-// EstimateModal.jsx
+import { API_BASE } from "@/lib/api";
 import { X, ArrowRight } from "lucide-react";
 import { useState } from "react";
 
-// Backend URL
-const API_BASE = process.env.NEXT_PUBLIC_BASE_URL || "https://nodeskdevbackend.onrender.com/api";
 
 export default function EstimateModal({ onClose }) {
   const [formData, setFormData] = useState({
