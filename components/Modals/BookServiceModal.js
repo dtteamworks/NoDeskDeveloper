@@ -3,7 +3,7 @@ import {
   ArrowRight, CheckCircle2, DownloadCloud, X, ChevronDown
 } from "lucide-react";
 
-const BookServiceModal = ({handleInputChange, handleSubmit, timeSlots, languages, toggleLanguage, formData , isBookModalOpen, setIsBookModalOpen}) => {
+const BookServiceModal = ({handleInputChange, handleSubmit, timeSlots, languages, toggleLanguage, formData , isBookModalOpen, setIsBookModalOpen, setFormData}) => {
   return (
     <>
       <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">

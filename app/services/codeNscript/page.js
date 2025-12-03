@@ -50,22 +50,50 @@ export default function CodeScriptInstallation() {
     setInstallForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.table({
-      "Full Name": formData.fullName || "-",
-      Email: formData.email || "-",
-      Phone: formData.phone || "-",
-      Languages:
-        formData.languages.length > 0
-          ? formData.languages.join(", ")
-          : "Not selected",
-      "Callback Time": formData.callbackTime || "Not selected",
-      "Project Brief": formData.brief || "No brief provided",
-    });
-    alert("Form Submitted! Check browser console for details.");
-    setIsBookModalOpen(false);
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const payload = {
+    fullName: formData.fullName,
+    email: formData.email,
+    phone: formData.phone,
+    projectBrief: formData.brief || "No brief provided",
+    languages: formData.languages, // array jaise hai waise bhej rahe hain
+    callbackTime: formData.callbackTime,
   };
+
+  try {
+    const res = await fetch(`${API_BASE}/code-install-booking`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const result = await res.json();
+
+    if (res.ok) {
+      alert("Booking submitted successfully! We'll call you soon.");
+      setIsBookModalOpen(false);
+      
+      // Form reset
+      setFormData({
+        fullName: "",
+        email: "",
+        phone: "",
+        languages: [],
+        callbackTime: "",
+        brief: "",
+      });
+    } else {
+      alert("Error: " + (result.message || "Submission failed"));
+    }
+  } catch (err) {
+    console.error("Submit error:", err);
+    alert("Network error! Please try again.");
+  }
+};
 
 //   handleInstallSubmit
 const handleInstallSubmit = async (e) => {
@@ -259,6 +287,7 @@ const handleInstallSubmit = async (e) => {
             toggleLanguage={toggleLanguage}
             languages={languages}
             timeSlots={timeSlots}
+            setFormData={setFormData}
             handleInputChange={handleInputChange}
             handleSubmit={handleSubmit}
             isBookModalOpen={isBookModalOpen}
