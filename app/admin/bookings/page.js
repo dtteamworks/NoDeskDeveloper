@@ -49,7 +49,7 @@ const services = [
   },
   {
     id: 9,
-    title: "Project Estimation's Enquiries",
+    title: "Project Estimation's",
     route: "/admin/bookings/projectEstimations",
   }
 ];
