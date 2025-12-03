@@ -108,7 +108,7 @@ export default function SupportRequestModal({ onClose }) {
                 Code Type (multi-select)
               </label>
               <div className="flex flex-wrap gap-3">
-                {["PHP", "Flutter", "JavaScript", "React Native", "Others"].map(
+                {["React","Next.js", "Flutter", "JavaScript", "React Native", "Others"].map(
                   (type) => (
                     <button
                       key={type}
