@@ -6,6 +6,7 @@ import {
   Calendar,
   X,
   Languages,
+  Currency,
 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -149,10 +150,10 @@ const DevCard = ({ filteredDevelopers }) => {
                 </div>
 
                 {/* Info Section */}
-                <div className="flex-1 min-w-0">
+                <div className="flex-1 min-w-0 text-left">
                   <div className="flex items-start justify-between gap-2">
                     <h3
-                      className="text-xl font-bold text-white truncate"
+                      className="text-xl font-bold text-left text-white truncate"
                       initial={{ x: -20, opacity: 0 }}
                       animate={{ x: 0, opacity: 1 }}
                       transition={{ delay: index * 0.1 + 0.2 }}
@@ -208,6 +209,23 @@ const DevCard = ({ filteredDevelopers }) => {
                   +{dev?.skills.length - 4}
                 </span>
               </div>
+              {/* langs */}
+              <div className="flex flex-wrap gap-2 mb-4">
+                {dev.preferredLanguage.slice(0, 4).map((lang) => (
+                  <span
+                    key={lang}
+                    className="px-3 py-1 bg-linear-to-tl from-purple-600/40 to-pink-600/40 backdrop-blur-md rounded-full text-xs font-medium text-white border border-purple-500/50 shadow-md"
+                  >
+                    {lang}
+                  </span>
+                ))}
+
+                {dev.preferredLanguage.length > 4 && (
+                  <span className="px-3 py-1 bg-linear-to-tl from-purple-600/40 to-pink-600/40 backdrop-blur-md rounded-full text-xs font-medium text-white border border-purple-500/50 shadow-md">
+                    +{dev.preferredLanguage.length - 4}
+                  </span>
+                )}
+              </div>
 
               {/* Stats Grid */}
               <div className="grid grid-cols-3 gap-3 mb-4">
@@ -231,10 +249,10 @@ const DevCard = ({ filteredDevelopers }) => {
 
                 {/* Preferred Language */}
                 <div className="flex flex-col items-center p-2 bg-purple-900/30 rounded-xl border border-purple-500/30">
-                  <Languages className="size-4 text-purple-400 mb-1" />
+                  <Currency className="size-4 text-purple-400 mb-1" />
                   <span className="text-xs text-purple-300 pb-1">Language</span>
                   <span className="text-sm font-bold text-white">
-                    {dev?.preferredLanguage}
+                    {dev?.hourlyRate}
                   </span>
                 </div>
               </div>

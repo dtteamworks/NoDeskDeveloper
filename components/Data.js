@@ -194,7 +194,7 @@ export const developerTiers = [
       "MERN Stack",
       "DevOps",
       "AI/ML",
-      "Cloud (AWS/Azure)",
+      "AWS/Azure",
       "Microservices",
       "Docker",
     ],

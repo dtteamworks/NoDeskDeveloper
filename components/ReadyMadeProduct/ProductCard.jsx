@@ -14,7 +14,7 @@ const ProductCard = ({ filteredProducts }) => {
       navigator.share({
         title: product.name,
         text: product.description,
-        url: window.location.href,
+        url: product.demoLink,
       });
     } else {
       alert(`Share ${product.name}`);
@@ -53,7 +53,7 @@ const ProductCard = ({ filteredProducts }) => {
 
             <div className="p-6 space-y-4">
               <div className="flex items-start justify-between gap-3">
-                <h3 className="text-xl font-bold text-white leading-tight line-clamp-2 flex-1">
+                <h3 className="text-xl text-left font-bold text-white leading-tight line-clamp-2 flex-1">
                   {product.name}
                 </h3>
                 <span className="text-xs font-semibold px-3 py-1.5 bg-linear-to-r from-blue-500/20 to-purple-500/20 rounded-full text-blue-300 border border-blue-400/30 whitespace-nowrap">
@@ -61,7 +61,7 @@ const ProductCard = ({ filteredProducts }) => {
                 </span>
               </div>
 
-              <p className="text-slate-300 text-sm leading-relaxed line-clamp-2">
+              <p className="text-slate-300 text-left truncate text-sm leading-relaxed line-clamp-2">
                 {product.description}
               </p>
 

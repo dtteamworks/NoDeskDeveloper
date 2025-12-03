@@ -16,7 +16,9 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 
-const API_BASE = process.env.NEXT_PUBLIC_BASE_URL || "https://nodeskdevbackend.onrender.com/api";
+const API_BASE =
+  process.env.NEXT_PUBLIC_BASE_URL ||
+  "https://nodeskdevbackend.onrender.com/api";
 
 export default function DeveloperDetailClient() {
   const params = useParams();
@@ -78,70 +80,77 @@ export default function DeveloperDetailClient() {
     }));
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  // Validation (extra safety)
-  if (!formData.clientName || !formData.email || !formData.phone || !formData.projectType || !formData.budget || !formData.description) {
-    alert("Please fill all fields");
-    return;
-  }
+    // Validation (extra safety)
+    if (
+      !formData.clientName ||
+      !formData.email ||
+      !formData.phone ||
+      !formData.projectType ||
+      !formData.budget ||
+      !formData.description
+    ) {
+      alert("Please fill all fields");
+      return;
+    }
 
-  const bookingData = {
-    clientName: formData.clientName,
-    email: formData.email,
-    phone: formData.phone,
-    projectType: formData.projectType,
-    estimatedBudget: formData.budget,
-    description: formData.description,
-    developerRate: `₹${developer.hourlyRate}/hr`, // optional, just for display
-    developer: {
-      id: developer._id,
-      name: developer.name,
-      hourlyRate: developer.hourlyRate,
-      experience: developer.experience,
-      level: developer.level,
-    },
-  };
-
-  try {
-    setLoading(true); // optional: reuse loading state ya alag bana sakta hai
-
-    const response = await fetch(`${API_BASE}/book-developer`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const bookingData = {
+      clientName: formData.clientName,
+      email: formData.email,
+      phone: formData.phone,
+      projectType: formData.projectType,
+      estimatedBudget: formData.budget,
+      description: formData.description,
+      developerRate: `₹${developer.hourlyRate}/hr`, // optional, just for display
+      developer: {
+        id: developer._id,
+        name: developer.name,
+        hourlyRate: developer.hourlyRate,
+        experience: developer.experience,
+        level: developer.level,
       },
-      body: JSON.stringify(bookingData),
-    });
+    };
 
-    const result = await response.json();
+    try {
+      setLoading(true); // optional: reuse loading state ya alag bana sakta hai
 
-    if (response.ok && result.success) {
-      alert("Booking request sent successfully! We'll contact you soon.");
-      
-      // Optional: Reset form
-      setFormData({
-        clientName: "",
-        email: "",
-        phone: "",
-        projectType: "",
-        budget: "",
-        description: "",
+      const response = await fetch(`${API_BASE}/book-developer`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bookingData),
       });
 
-      // Optional: Redirect to thank you or my-bookings page
-      // router.push("/thank-you");
-    } else {
-      alert(result.message || "Something went wrong. Try again.");
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        alert("Booking request sent successfully! We'll contact you soon.");
+
+        // Optional: Reset form
+        setFormData({
+          clientName: "",
+          email: "",
+          phone: "",
+          projectType: "",
+          budget: "",
+          description: "",
+        });
+
+        // Optional: Redirect to thank you or my-bookings page
+        // router.push("/thank-you");
+      } else {
+        alert(result.message || "Something went wrong. Try again.");
+      }
+    } catch (err) {
+      console.error("Booking Error:", err);
+      alert("Network error. Please check your internet and try again.");
+    } finally {
+      setLoading(false);
     }
-  } catch (err) {
-    console.error("Booking Error:", err);
-    alert("Network error. Please check your internet and try again.");
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
   if (loading) {
     return (
@@ -158,7 +167,9 @@ const handleSubmit = async (e) => {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
-          <div className="text-red-500 text-xl mb-4">{error || "Developer not found"}</div>
+          <div className="text-red-500 text-xl mb-4">
+            {error || "Developer not found"}
+          </div>
           <button
             onClick={() => router.push("/developers")}
             className="px-6 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors"
@@ -216,7 +227,9 @@ const handleSubmit = async (e) => {
                     </h1>
                     <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
                       <MapPin className="size-4" />
-                      <span>{developer.state}, {developer.country}</span>
+                      <span>
+                        {developer.state}, {developer.country}
+                      </span>
                     </div>
 
                     <div className="flex items-center gap-2 flex-wrap">
@@ -280,24 +293,39 @@ const handleSubmit = async (e) => {
                 {/* Additional Info */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
                   <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-4 py-3">
-                    <BadgeCheck className={`size-5 ${
-                      developer.availability === "Full-time"
-                        ? "text-blue-400"
-                        : developer.availability === "Part-time"
-                        ? "text-yellow-400"
-                        : "text-green-400"
-                    }`} />
+                    <BadgeCheck
+                      className={`size-5 ${
+                        developer.availability === "Full-time"
+                          ? "text-blue-400"
+                          : developer.availability === "Part-time"
+                          ? "text-yellow-400"
+                          : "text-green-400"
+                      }`}
+                    />
                     <div>
                       <p className="text-xs text-gray-400">Availability</p>
-                      <p className="text-sm text-white font-medium">{developer.availability}</p>
+                      <p className="text-sm text-white font-medium">
+                        {developer.availability}
+                      </p>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-4 py-3">
                     <Languages className="size-5 text-purple-400" />
+
                     <div>
-                      <p className="text-xs text-gray-400">Language</p>
-                      <p className="text-sm text-white font-medium">{developer.preferredLanguage}</p>
+                      <p className="text-xs text-gray-400">Languages</p>
+
+                      <div className="flex flex-wrap gap-2 mt-1">
+                        {developer.preferredLanguage?.map((lang) => (
+                          <span
+                            key={lang}
+                            className="px-3 py-1 bg-linear-to-tl from-purple-600/40 to-pink-600/40 backdrop-blur-md rounded-full text-xs font-medium text-white border border-purple-500/50 shadow-md"
+                          >
+                            {lang}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>

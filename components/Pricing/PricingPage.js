@@ -154,14 +154,18 @@ export default function PricingPage() {
                         Technologies:
                       </p>
                       <div className="flex flex-wrap gap-2">
-                        {tier.technologies.map((tech) => (
+                        {tier.technologies.slice(0,4).map((tech) => (
                           <span
                             key={tech}
-                            className="px-3 py-1 bg-white/5 border border-blue-500/30 rounded-lg text-xs text-gray-300"
+                            className="px-3 py-1 bg-white/5 border border-blue-500/30 rounded-lg text-[10px] text-gray-300"
                           >
                             {tech}
                           </span>
                         ))}
+                        <span
+                            className="px-3 py-1 bg-white/5 border border-blue-500/30 rounded-lg text-[10px] text-gray-300"
+                          > + more
+                          </span>
                       </div>
                     </div>
 
@@ -261,14 +265,14 @@ export default function PricingPage() {
                     </p>
 
                     {/* Features */}
-                    <ul className="space-y-3 mb-8">
+                    <ul className="mb-8 flex flex-wrap gap-2">
                       {software.features.map((feature) => (
-                        <li key={feature} className="flex items-start gap-3">
+                        <li key={feature} className="flex items-start gap-2 border w-fit px-3 py-1 rounded-full border-white/20 ">
                           <Check
-                            className="w-5 h-5 text-teal-400 shrink-0 mt-0.5"
+                            className="size-4 text-teal-400 shrink-0"
                             strokeWidth={3}
                           />
-                          <span className="text-gray-300 text-sm">
+                          <span className="text-gray-300 text-[10px] font-semibold">
                             {feature}
                           </span>
                         </li>

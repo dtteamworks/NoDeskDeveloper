@@ -69,7 +69,7 @@ export const getStartedLinks = [
     icon: Package,
     title: "Ready-made Software",
     desc: "Launch with proven apps instantly",
-    href: "/software",
+    href: "/softwares-readymade",
     linear: "from-fuchsia-600 to-pink-600",
   },
   {

@@ -47,7 +47,7 @@ export default function DevCard({ developer }) {
 
           <div className="flex items-center gap-2 text-gray-300">
             <span className="text-pink-400">Language:</span>
-            <span>{preferredLanguage}</span>
+            <span>{preferredLanguage[0] || "English"}</span>
           </div>
 
           <div className="flex items-center gap-2 text-gray-300">
