@@ -1,10 +1,14 @@
+// EstimateModal.jsx
 import { X, ArrowRight } from "lucide-react";
 import { useState } from "react";
+
+// Backend URL
+const API_BASE = process.env.NEXT_PUBLIC_BASE_URL || "https://nodeskdevbackend.onrender.com/api";
 
 export default function EstimateModal({ onClose }) {
   const [formData, setFormData] = useState({
     productType: "",
-    codingLangs: "React, Node, Flutter",
+    codingLangs: "", // comma-separated string from input
     aboutProduct: "",
     discussionTime: "",
     phone: "",
@@ -13,21 +17,62 @@ export default function EstimateModal({ onClose }) {
     language: "",
   });
 
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Estimate Request Submitted:", {
-      ...formData,
-      submittedAt: new Date().toISOString(),
-    });
-    onClose();
+    setLoading(true);
 
-    setTimeout(() => {
-      alert("Thank you for requesting an estimate! We will get back to you soon.");
-    }, 1000);
+    // Convert comma-separated coding languages into array
+    const codingLangsArray = formData.codingLangs
+      .split(",")
+      .map((lang) => lang.trim())
+      .filter((lang) => lang.length > 0);
+
+    if (codingLangsArray.length === 0) {
+      alert("Please enter at least one coding language (comma separated).");
+      setLoading(false);
+      return;
+    }
+
+    const payload = {
+      productType: formData.productType.trim(),
+      codingLangs: codingLangsArray, // array bhej rahe hain (schema mein [String])
+      aboutProduct: formData.aboutProduct.trim(),
+      discussionTime: formData.discussionTime.trim(),
+      phone: formData.phone.trim(),
+      email: formData.email.toLowerCase().trim(),
+      whatsapp: formData.whatsapp.trim(),
+      language: formData.language.trim() || "English",
+    };
+
+    try {
+      const res = await fetch(`${API_BASE}/project-estimation`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await res.json();
+
+      if (res.ok) {
+        alert("Thank you for requesting an estimate! We will get back to you soon.");
+        onClose();
+      } else {
+        alert("Error: " + (result.message || "Submission failed. Please try again."));
+      }
+    } catch (err) {
+      console.error("Submission error:", err);
+      alert("Network error! Please check your connection and try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -46,7 +91,7 @@ export default function EstimateModal({ onClose }) {
           <X className="w-6 h-6 text-gray-400" />
         </button>
 
-        <h2 className="text-2xl lg:text-3xl font-bold text-white mb-8 bg-linear-to-r from-blue-400 via-sky-50  to-teal-600 bg-clip-text">
+        <h2 className="text-2xl lg:text-3xl font-bold text-white mb-8 bg-linear-to-r from-blue-400 via-sky-500 to-teal-600 bg-clip-text">
           Project Estimations
         </h2>
 
@@ -60,20 +105,22 @@ export default function EstimateModal({ onClose }) {
                 value={formData.productType}
                 placeholder="Mobile App"
                 onChange={handleChange}
-                className="mt-2 w-full px-5 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-gray-300 "
+                required
+                className="mt-2 w-full px-5 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-gray-300 focus:outline-none focus:border-blue-400 transition"
               />
             </div>
             <div>
               <label className="text-gray-400 text-sm">
-                Required Coding Languages
+                Required Coding Languages <span className="text-xs">(comma separated)</span>
               </label>
               <input
                 type="text"
                 name="codingLangs"
                 value={formData.codingLangs}
                 onChange={handleChange}
-                placeholder="React, Node, Flutter"
-                className="mt-2 w-full px-5 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-gray-300 "
+                placeholder="React, Node.js, Flutter"
+                required
+                className="mt-2 w-full px-5 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-gray-300 focus:outline-none focus:border-blue-400 transition"
               />
             </div>
           </div>
@@ -101,7 +148,8 @@ export default function EstimateModal({ onClose }) {
                 name="discussionTime"
                 value={formData.discussionTime}
                 onChange={handleChange}
-                className="mt-2 w-full px-5 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-400"
+                required
+                className="mt-2 w-full px-5 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-400 transition"
               />
             </div>
             <div>
@@ -113,7 +161,7 @@ export default function EstimateModal({ onClose }) {
                 value={formData.phone}
                 onChange={handleChange}
                 required
-                className="mt-2 w-full px-5 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-400"
+                className="mt-2 w-full px-5 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-400 transition"
               />
             </div>
           </div>
@@ -127,7 +175,7 @@ export default function EstimateModal({ onClose }) {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="mt-2 w-full px-5 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-400"
+                className="mt-2 w-full px-5 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-400 transition"
               />
             </div>
             <div>
@@ -137,8 +185,8 @@ export default function EstimateModal({ onClose }) {
                 name="whatsapp"
                 value={formData.whatsapp}
                 onChange={handleChange}
-                placeholder="+91xxxxxxxx"
-                className="mt-2 w-full px-5 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-400"
+                required
+                className="mt-2 w-full px-5 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-400 transition"
               />
             </div>
           </div>
@@ -153,7 +201,8 @@ export default function EstimateModal({ onClose }) {
               value={formData.language}
               onChange={handleChange}
               placeholder="English / Hindi / Bengali"
-              className="mt-2 w-full px-5 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-gray-400"
+              required
+              className="mt-2 w-full px-5 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-gray-300 focus:outline-none focus:border-blue-400 transition"
             />
           </div>
 
@@ -161,16 +210,22 @@ export default function EstimateModal({ onClose }) {
             <button
               type="button"
               onClick={onClose}
-              className="px-6 py-3 bg-white/10 border border-blue-500/30 rounded-2xl text-gray-400 hover:bg-white/20 transition"
+              disabled={loading}
+              className="px-6 py-3 bg-white/10 border border-blue-500/30 rounded-2xl text-gray-400 hover:bg-white/20 transition disabled:opacity-50"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-6 py-3 bg-linear-to-r from-blue-600 via-sky-500 to-teal-600 rounded-2xl font-bold text-white shadow-lg hover:shadow-blue-500/50 transition-all hover:scale-105 flex items-center gap-2"
+              disabled={loading}
+              className="px-6 py-3 bg-linear-to-r from-blue-600 via-sky-500 to-teal-600 rounded-2xl font-bold text-white shadow-lg hover:shadow-blue-500/50 transition-all hover:scale-105 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Request Estimate
-              <ArrowRight className="w-5 h-5" />
+              {loading ? "Submitting..." : (
+                <>
+                  Request Estimate
+                  <ArrowRight className="w-5 h-5" />
+                </>
+              )}
             </button>
           </div>
         </form>
