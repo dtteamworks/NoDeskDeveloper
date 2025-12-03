@@ -119,7 +119,7 @@ export default function FooterComponent() {
                 className="flex items-center gap-3 text-gray-400 hover:text-blue-400 transition-colors duration-300 group w-fit"
               >
                 <div className="p-2 rounded-lg bg-blue-500/10 group-hover:bg-blue-500/20 transition-colors duration-300">
-                  <FaWhatsapp className="w-4 h-4" />
+                  <FaWhatsapp  className="w-4 h-4" />
                 </div>
                 <span className="text-sm">+91 8121923831</span>
               </Link>
