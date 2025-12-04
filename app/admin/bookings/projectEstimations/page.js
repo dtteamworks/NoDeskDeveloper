@@ -89,7 +89,7 @@ export default function AdminProjectEstimations() {
                     </p>
                   </div>
 
-                  <p className="text-sm text-gray-400 line-clamp-2">
+                  <p className="text-sm text-gray-400 line-clamp-2  min-h-9 overflow-hidden">
                     {item.aboutProduct}
                   </p>
 
