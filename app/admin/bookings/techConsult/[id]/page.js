@@ -70,13 +70,13 @@ export default function AdminTechConsultDetails() {
 
   return (
     <div className="min-h-screen bg-black/95 p-6 lg:p-10">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <button onClick={() => router.back()} className="mb-6 flex items-center gap-2 text-cyan-400 hover:text-cyan-300">
           <ArrowLeft className="w-5 h-5" /> Back to List
         </button>
 
-        <div className="bg-gradient-to-br  from-slate-900/90 to-slate-950/90 border border-cyan-500/30 rounded-2xl p-8 shadow-2xl backdrop-blur-xl">
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-8">
+        <div className="bg-linear-to-br  from-slate-900/90 to-slate-950/90 border border-cyan-500/30 rounded-2xl p-8 shadow-2xl backdrop-blur-xl">
+          <h1 className="text-xl md:text-3xl font-bold bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-4 md:mb-8">
             Consultation Request Details
           </h1>
 
@@ -110,7 +110,7 @@ export default function AdminTechConsultDetails() {
             <button
               onClick={handleUpdate}
               disabled={updating || status === consult.status}
-              className="px-8 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-xl font-bold text-white flex items-center justify-center gap-2 disabled:opacity-50"
+              className="px-8 py-3 bg-linear-to-r from-cyan-600 to-blue-600 rounded-xl font-bold text-white flex items-center justify-center gap-2 disabled:opacity-50"
             >
               {updating ? <Loader2 className="w-5 h-5 animate-spin" /> : <CheckCircle className="w-5 h-5" />}
               Update Status
@@ -119,7 +119,7 @@ export default function AdminTechConsultDetails() {
             <button
               onClick={handleDelete}
               disabled={deleting}
-              className="px-8 py-3 bg-gradient-to-r from-red-600 to-red-500 rounded-xl font-bold text-white flex items-center justify-center gap-2 disabled:opacity-50"
+              className="px-8 py-3 bg-linear-to-r from-red-600 to-red-500 rounded-xl font-bold text-white flex items-center justify-center gap-2 disabled:opacity-50"
             >
               {deleting ? <Loader2 className="w-5 h-5 animate-spin" /> : <Trash2 className="w-5 h-5" />}
               Delete Request
