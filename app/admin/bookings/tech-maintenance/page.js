@@ -98,7 +98,7 @@ export default function AdminTechMaintenaceEnqs() {
                     onClick={() =>
                       router.push(`/admin/bookings/tech-maintenance/${req._id}`)
                     }
-                    className="w-full py-3 bg-linear-to-r from-blue-600 via-sky-500 to-teal-400 rounded-2xl font-bold text-white shadow-lg hover:shadow-sky-500/70 transition-all duration-400 hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
+                    className="w-full py-3 bg-linear-to-tl from-blue-600 via-sky-500 to-teal-400 rounded-2xl font-bold text-white shadow-lg hover:shadow-sky-500/70 transition-all duration-400 hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
                   >
                     View Details
                   </button>
