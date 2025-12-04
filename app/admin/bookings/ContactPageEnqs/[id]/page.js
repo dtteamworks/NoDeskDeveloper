@@ -85,7 +85,7 @@ export default function AdminContactDetail() {
         </button>
 
         <div className="bg-linear-to-br from-slate-900/90 to-slate-950/90 border border-purple-500/30 rounded-2xl p-8 shadow-2xl backdrop-blur-xl">
-          <h1 className="text-3xl font-bold bg-linear-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent mb-8">
+          <h1 className="text-2xl md:text-3xl font-bold bg-linear-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent mb-8">
             Contact Enquiry Details
           </h1>
 
