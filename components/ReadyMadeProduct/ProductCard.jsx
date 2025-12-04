@@ -34,7 +34,7 @@ const ProductCard = ({ filteredProducts }) => {
           >
             <div className="absolute inset-0 bg-linear-to-br from-blue-500/0 via-purple-500/0 to-blue-500/0 group-hover:from-blue-500/10 group-hover:via-purple-500/5 group-hover:to-blue-500/10 transition-all duration-700 pointer-events-none" />
 
-            <div className="relative h-48 overflow-hidden bg-slate-800/50">
+            <div className="relative h-60 overflow-hidden bg-slate-800/50">
               <Image
                 src={product.screenshots?.[0] || "/placeholder.jpg"}
                 alt={product.name}
@@ -45,23 +45,23 @@ const ProductCard = ({ filteredProducts }) => {
               <div className="absolute inset-0 bg-linear-to-t from-slate-900 via-slate-900/40 to-transparent" />
               <button
                 onClick={() => shareProduct(product)}
-                className="absolute top-4 right-4 p-2.5 bg-slate-800/80 backdrop-blur-md rounded-xl hover:bg-slate-700/80 transition-all duration-300 hover:scale-110 hover:rotate-12 border border-slate-600/50"
+                className="absolute top-4 cursor-pointer right-4 p-2.5 bg-slate-800/80 backdrop-blur-md rounded-xl hover:bg-slate-700/80 transition-all duration-300 hover:scale-110 hover:rotate-12 border border-slate-600/50"
               >
                 <Share2 className="w-4 h-4 text-slate-200" />
               </button>
             </div>
 
-            <div className="p-6 space-y-4">
+            <div className="p-6 space-y-3 ">
               <div className="flex items-start justify-between gap-3">
                 <h3 className="text-xl text-left font-bold text-white leading-tight line-clamp-2 flex-1">
                   {product.name}
                 </h3>
-                <span className="text-xs font-semibold px-3 py-1.5 bg-linear-to-r from-blue-500/20 to-purple-500/20 rounded-full text-blue-300 border border-blue-400/30 whitespace-nowrap">
+                <span className="text-xs font-semibold px-3 py-1 bg-linear-to-r from-blue-500/20 to-purple-500/20 rounded-full text-blue-300 border border-blue-400/30 whitespace-nowrap">
                   {product.category}
                 </span>
               </div>
 
-              <p className="text-slate-300 text-left truncate text-sm leading-relaxed line-clamp-2">
+              <p className="text-slate-300 text-left truncate text-xs leading-relaxed line-clamp-2">
                 {product.description}
               </p>
 
@@ -72,11 +72,11 @@ const ProductCard = ({ filteredProducts }) => {
                     className="flex items-center gap-1.5 px-2.5 py-1 bg-slate-800/50 rounded-lg border border-slate-700/50"
                   >
                     {platform === "Web" ? (
-                      <Monitor className="w-3.5 h-3.5 text-slate-400" />
+                      <Monitor className="size-3.5 text-slate-400" />
                     ) : (
-                      <Smartphone className="w-3.5 h-3.5 text-slate-400" />
+                      <Smartphone className="size-3.5 text-slate-400" />
                     )}
-                    <span className="text-xs text-slate-400 font-medium">
+                    <span className="text-[10px] text-slate-400 font-medium">
                       {platform}
                     </span>
                   </div>
@@ -92,7 +92,7 @@ const ProductCard = ({ filteredProducts }) => {
                   .map((tech) => (
                     <span
                       key={tech}
-                      className="text-xs px-2 py-1 bg-slate-800/60 text-slate-300 rounded-md border border-slate-700/50"
+                      className="text-[11px] tracking-wide px-2 py-1 bg-slate-800/60 text-slate-300 rounded-md border border-slate-700/50"
                     >
                       {tech}
                     </span>
@@ -121,7 +121,7 @@ const ProductCard = ({ filteredProducts }) => {
                 </div>
               </div>
 
-              <div className="flex gap-3 pt-2">
+              <div className="flex gap-3 pt-2 *:cursor-pointer">
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
