@@ -111,7 +111,7 @@ export default function AdminLayout({ children }) {
         </aside>
 
         {/* Mobile Header */}
-        <div className="lg:hidden fixed top-0 left-0 right-0 z-50 h-16 bg-black/80 backdrop-blur-2xl border-b border-white/10 flex items-center justify-between px-4">
+        <div className="lg:hidden fixed top-0 left-0 right-0 z-50 h-16 bg-black/80 backdrop-blur-2xl border-b border-white/30 flex items-center justify-between px-4">
           <h1 className="text-xl font-black bg-linear-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
             Admin Panel
           </h1>
