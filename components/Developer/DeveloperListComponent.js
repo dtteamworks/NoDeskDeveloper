@@ -5,10 +5,20 @@ import { Search } from "lucide-react";
 import DevCard from "./DevCard";
 import { API_BASE } from "@/lib/api";
 
-
 const techOptions = [
-  "All", "React", "Next.js", "Flutter", "Laravel", "Node.js", "Python", 
-  "React Native", "Angular", "Vue.js", "TypeScript", "MongoDB", "Firebase"
+  "All",
+  "React",
+  "Next.js",
+  "React Native",
+  "Laravel",
+  "Flutter",
+  "Node.js",
+  "Python",
+  "Angular",
+  "TypeScript",
+  "MongoDB",
+  "Vue.js",
+  "Firebase",
 ];
 const experienceLevels = ["All", "Beginner", "Intermediate", "Expert"];
 
@@ -24,7 +34,9 @@ export default function DevelopersPage() {
   useEffect(() => {
     const fetchDevelopers = async () => {
       try {
-        const res = await fetch(`${API_BASE}/developers`, { cache: "no-store" });
+        const res = await fetch(`${API_BASE}/developers`, {
+          cache: "no-store",
+        });
         const result = await res.json();
 
         if (result.success) {
@@ -49,7 +61,9 @@ export default function DevelopersPage() {
       filtered = filtered.filter(
         (dev) =>
           dev.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          dev.skills.some((s) => s.toLowerCase().includes(searchTerm.toLowerCase())) ||
+          dev.skills.some((s) =>
+            s.toLowerCase().includes(searchTerm.toLowerCase())
+          ) ||
           dev.country?.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
@@ -122,7 +136,7 @@ export default function DevelopersPage() {
               <button
                 key={level}
                 onClick={() => setSelectedLevel(level)}
-                className={`px-4 py-1.5 rounded-full text-sm transition-all ${
+                className={`px-4 py-1.5 rounded-full text-[11px] md:text-sm transition-all ${
                   selectedLevel === level
                     ? "bg-linear-to-r from-blue-600 to-purple-600 text-white"
                     : "bg-white/5 text-gray-300 hover:bg-white/10"
@@ -133,12 +147,12 @@ export default function DevelopersPage() {
             ))}
           </div>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2 md:gap-3">
             {techOptions.map((tech) => (
               <button
                 key={tech}
                 onClick={() => setSelectedTech(tech)}
-                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
+                className={`px-4 py-1.5 rounded-full text-[11px] md:text-sm font-medium transition-all ${
                   selectedTech === tech
                     ? "bg-blue-500/30 text-blue-300 border border-blue-400/50"
                     : "bg-white/5 text-gray-300 hover:bg-white/10"
@@ -153,8 +167,10 @@ export default function DevelopersPage() {
         <div className="my-4 px-4 text-sm">
           <p className="text-gray-400">
             Showing{" "}
-            <span className="text-white font-bold">{filteredDevelopers.length}</span> elite
-            developers
+            <span className="text-white font-bold">
+              {filteredDevelopers.length}
+            </span>{" "}
+            elite developers
           </p>
         </div>
 
@@ -163,7 +179,9 @@ export default function DevelopersPage() {
 
         {filteredDevelopers.length === 0 && (
           <div className="text-center py-24">
-            <p className="text-3xl font-bold text-blue-400">No developers found</p>
+            <p className="text-3xl font-bold text-blue-400">
+              No developers found
+            </p>
             <p className="text-blue-300 mt-2">Try changing filters</p>
           </div>
         )}
