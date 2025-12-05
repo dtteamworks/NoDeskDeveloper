@@ -7,6 +7,8 @@ import { ArrowLeft, Save, Trash2, Upload } from "lucide-react";
 import { CldUploadWidget } from "next-cloudinary";
 import { useParams, useRouter } from "next/navigation";
 import { API_BASE } from "@/lib/api";
+import { countrielsList } from "@/components/AdminPanel/Data";
+
 
 export default function DeveloperDetailPage() {
   const { id } = useParams(); // ← yeh sahi tarika hai [id] folder se ID lene ka
@@ -253,7 +255,7 @@ export default function DeveloperDetailPage() {
               className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-blue-500/60 outline-none transition"
               required
             />
-            <input
+            {/* <input
               type="text"
               name="country"
               value={developer.country}
@@ -261,7 +263,23 @@ export default function DeveloperDetailPage() {
               placeholder="Country"
               className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-blue-500/60 outline-none transition"
               required
-            />
+            /> */}
+
+            {/* Country - ab dropdown hai */}
+            <select
+              name="country"
+              value={developer.country}
+              onChange={handleChange}
+              className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white focus:border-blue-500/60 outline-none transition"
+              required
+            >
+              <option value="">Select Country</option>
+              {countrielsList.map((country) => (
+                <option key={country} value={country} className="bg-black">
+                  {country}
+                </option>
+              ))}
+            </select>
 
             <select
               name="availability"
@@ -330,7 +348,7 @@ export default function DeveloperDetailPage() {
 
             <button
               type="submit"
-              className="px-10 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold rounded-xl flex items-center gap-3 shadow-xl hover:shadow-purple-500/50 transition-all hover:scale-105"
+              className="px-10 py-4 bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold rounded-xl flex items-center gap-3 shadow-xl hover:shadow-purple-500/50 transition-all hover:scale-105"
             >
               <Save className="w-5 h-5" />
               Update Now
