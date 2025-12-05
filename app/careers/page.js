@@ -107,7 +107,7 @@ export default function CareersPage() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-7xl font-extrabold mb-4">
-              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
                 Join Our Team
               </span>
             </h1>
@@ -116,7 +116,7 @@ export default function CareersPage() {
             </p>
           </div>
 
-          <div className="bg-gradient-to-br from-blue-900/20 via-transparent to-teal-900/10 backdrop-blur-xl rounded-2xl border border-blue-500/20 shadow-2xl p-8 md:p-12">
+          <div className="bg-linear-to-br from-blue-900/20 via-transparent to-teal-900/10 backdrop-blur-xl rounded-2xl border border-blue-500/20 shadow-2xl p-8 md:p-12">
             <div className="space-y-8">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
@@ -304,7 +304,7 @@ export default function CareersPage() {
                   type="button"
                   onClick={handleSubmit}
                   disabled={isSubmitting}
-                  className="w-full py-5 cursor-pointer bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl font-bold text-xl text-white hover:from-blue-500 hover:to-cyan-500 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+                  className="w-full py-5 cursor-pointer bg-linear-to-r from-blue-600 to-cyan-600 rounded-xl font-bold text-xl text-white hover:from-blue-500 hover:to-cyan-500 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-3"
                 >
                   {isSubmitting ? "Submitting..." : "Submit Application"}
                   {!isSubmitting && <Send className="w-5 h-5" />}
