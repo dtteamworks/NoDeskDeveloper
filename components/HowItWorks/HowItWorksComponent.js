@@ -1,8 +1,4 @@
-import {
-  guidedSteps,
-  quickFeatures,
-  workflowSteps,
-} from "@/components/QuicLinksData";
+import {guidedSteps,quickFeatures,workflowSteps,} from "@/components/QuicLinksData";
 import { Sparkles } from "lucide-react";
 
 export default function HowItWorksComponent() {
@@ -20,13 +16,13 @@ export default function HowItWorksComponent() {
       <div className="relative max-w-[1350px] mx-auto">
         {/* Main Header */}
         <div className="mb-8">
-          <h1 className="text-5xl md:text-6xl font-black mb-4">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black mb-4">
             <span className="text-white">How It </span>
             <span className="bg-linear-to-r from-blue-600 via-sky-600 to-teal-600 bg-clip-text text-transparent">
               Works
             </span>
           </h1>
-          <p className="text-gray-400 text-lg max-w-2xl">
+          <p className="text-gray-400 text-sm sm:text-lg max-w-2xl">
             A simple, transparent workflow—from discovery to delivery to
             post-launch support.
           </p>
@@ -48,9 +44,12 @@ export default function HowItWorksComponent() {
                   <div
                     className={`p-1 bg-linear-to-r ${step.color} rounded-lg`}
                   >
-                    <Icon className="w-4 h-4 text-white" strokeWidth={2.5} />
+                    <Icon
+                      className="size-3 sm:size-4 text-white"
+                      strokeWidth={2.5}
+                    />
                   </div>
-                  <span className="text-sm font-medium text-gray-300">
+                  <span className="text-xs sm:text-sm font-medium text-gray-300">
                     {step.label}
                   </span>
                 </div>

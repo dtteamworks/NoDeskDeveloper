@@ -20,7 +20,6 @@ export const workflowSteps = [
     color: "from-indigo-500 to-purple-500",
   },
   { icon: Cloud, label: "DevOps", color: "from-cyan-500 to-blue-500" },
-  { icon: Shield, label: "Security", color: "from-red-500 to-pink-500" },
   {
     icon: Activity,
     label: "Monitoring",
@@ -28,6 +27,7 @@ export const workflowSteps = [
   },
   { icon: Target, label: "QA", color: "from-yellow-500 to-orange-500" },
   { icon: Zap, label: "Performance", color: "from-purple-500 to-indigo-500" },
+  { icon: Shield, label: "Security", color: "from-red-500 to-pink-500" },
 ];
 
 // Quick Features Data
