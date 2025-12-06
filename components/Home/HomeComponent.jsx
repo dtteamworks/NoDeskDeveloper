@@ -118,7 +118,7 @@ export default function HomePage() {
         </section>
 
         {/* Services We Offer – Horizontal Scrollable Cards */}
-        <section className="py-20 px-6 bg-linear-to-b from-transparent via-blue-950/50 to-transparent">
+        <section className="py-12 px-6 bg-linear-to-b from-transparent via-blue-950/50 to-transparent">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-[35px] md:text-6xl font-black text-center mb-16">
               <span className="bg-linear-to-r from-cyan-400 via-blue-400 to-sky-400 bg-clip-text text-transparent">
@@ -130,47 +130,12 @@ export default function HomePage() {
               </span>
             </h2>
             {/* Loop Of Logos of Teck */}
-            <div
-              className="max-w-[90vw] md:max-w-5xl mb-16 mx-auto  px-4 py-0 rounded-3xl drop-shadow-md border-white/40 mt-8 flex justify-center items-center "
-              style={{
-                height: "100px",
-                position: "relative",
-                overflow: "hidden",
-              }}
-            >
+            <div className="max-w-[90vw] md:max-w-5xl mx-auto  px-4 py-0 rounded-3xl drop-shadow-md border-white/40 mt-8 flex justify-center items-center " style={{ height: "100px", position: "relative", overflow: "hidden", }} >
               {/* Basic horizontal loop */}
-              <LogoLoop
-                logos={techLogos}
-                speed={120}
-                direction="left"
-                logoHeight={48}
-                gap={40}
-                hoverSpeed={0}
-                scaleOnHover
-                fadeOut
-                fadeOutColor="#0000"
-                ariaLabel="Technology partners"
-              />
+              <LogoLoop logos={techLogos} speed={120} direction="left" logoHeight={48} gap={40} hoverSpeed={0} scaleOnHover fadeOut fadeOutColor="#0000" ariaLabel="Technology partners" />
             </div>
 
-            {/* {services.map((service) => (
-                <Link
-                  href="/developers"
-                  key={service.title}
-                  className={`group relative p-8 bg-linear-to-br ${service.color} bg-opacity-20 backdrop-blur-3xl rounded-3xl border border-white/20 hover:border-cyan-400 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/50`}
-                >
-                  <div className="absolute inset-0 bg-linear-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
-                  <div className="relative flex flex-col items-center text-center">
-                    <div className="w-20 h-20 rounded-2xl bg-white/20 backdrop-blur-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                      <service.icon className="w-10 h-10 text-white" />
-                    </div>
-                    <h3 className="text-sm text-nowrap sm:text-xl font-black text-white">
-                      {service.title}
-                    </h3>
-                  </div>
-                </Link>
-              ))} */}
-            <ServicesVerticalBar />
+            {/* <ServicesVerticalBar /> */}
           </div>
         </section>
         {/* ===================================================================================================================== */}

@@ -14,7 +14,7 @@ const ProductCard = ({ filteredProducts }) => {
       navigator.share({
         title: product.name,
         text: product.description,
-        url: product.demoLink,
+        url: window.location.href+"/"+product?._id,
       });
     } else {
       alert(`Share ${product.name}`);
