@@ -5,6 +5,7 @@
 import { useState, useEffect, useRef } from "react";
 import { CldUploadWidget } from "next-cloudinary";
 import { X, Upload, Check, Loader2 } from "lucide-react";
+import Image from "next/image";
 
 export default function AddDeveloperModal({ isOpen, onClose, onAdd }) {
   const [formData, setFormData] = useState({
@@ -135,8 +136,10 @@ export default function AddDeveloperModal({ isOpen, onClose, onAdd }) {
                     ) : formData.photo ? (
                       <div className="space-y-4">
                         <div className="w-40 h-40 mx-auto rounded-2xl overflow-hidden border-4 border-blue-500/50 shadow-2xl">
-                          <img
+                          <Image
                             src={formData.photo}
+                            width={1920}
+                            height={1080}
                             alt="Preview"
                             className="w-full h-full object-cover"
                           />

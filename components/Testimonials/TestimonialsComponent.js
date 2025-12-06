@@ -114,7 +114,7 @@ export default function Testimonials() {
                         </div>
 
                         {/* Quote */}
-                        <p className="text-gray-300 text-[15px] leading-relaxed mb-6 min-h-20">"{testimonial.text}"</p>
+                        <p className="text-gray-300 text-[15px] leading-relaxed mb-6 min-h-20">&#34;{testimonial.text}&#34;</p>
 
                         {/* Author */}
                         <div className="border-t border-white/10 pt-4">

@@ -126,7 +126,7 @@ export default function CareersPage() {
               </span>
             </h1>
             <p className="text-sm md:text-lg text-cyan-200/70 font-medium">
-              Be part of something extraordinary. Apply now and let's build the future together.
+              Be part of something extraordinary. Apply now and let&#39;s build the future together.
             </p>
           </div>
 

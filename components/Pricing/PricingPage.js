@@ -37,7 +37,7 @@ export default function PricingPage() {
           </h1>
 
           <p className="text-gray-400 text-[16px] md:text-lg max-w-2xl mx-auto">
-            Whether you need expert developers or ready-made solutions, we've
+            Whether you need expert developers or ready-made solutions, we&#39;ve
             got you covered with flexible pricing options.
           </p>
         </div>

@@ -6,6 +6,7 @@ import BookServiceModal from "@/components/Modals/BookServiceModal";
 import InstallOwnCodeModal from "@/components/Modals/InstallOwnCodeModal";
 import { languages, setupTypes, timeSlots } from "@/components/Modals/Data";
 import { API_BASE } from "@/lib/api";
+import Image from "next/image";
 
 export default function CodeScriptInstallation() {
   const [isBookModalOpen, setIsBookModalOpen] = useState(false);
@@ -177,8 +178,10 @@ const handleInstallSubmit = async (e) => {
           <div className="grid lg:grid-cols-3 gap-8 mb-16 relative z-10">
             <div className="lg:col-span-1">
               <div className="bg-slate-900/50 border border-slate-700/50 rounded-2xl overflow-hidden h-full backdrop-blur-sm">
-                <img
+                <Image
                   src="https://images.pexels.com/photos/10508800/pexels-photo-10508800.jpeg"
+                  width={1920}
+                  height={1080}
                   alt="Code Installation Service"
                   className="w-full h-full object-cover"
                 />

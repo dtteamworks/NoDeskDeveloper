@@ -8,6 +8,7 @@ import {
   ArrowRight,
   CheckCircle2,
 } from "lucide-react";
+import Link from "next/link";
 
 export default function AboutUsPage() {
   return (
@@ -198,7 +199,7 @@ export default function AboutUsPage() {
                 >
                   <div className="text-4xl md:text-6xl text-cyan-400/30 mb-0 md:mb-4">“</div>
                   <p className="text-sm md:text-xl text-cyan-100 italic mb-2 md:mb-6 leading-relaxed">
-                    "{t.text}"
+                    &#34;{t.text}&#34;
                   </p>
                   <div>
                     <p className="font-bold text-white text-sm">{t.author}</p>
@@ -219,7 +220,7 @@ export default function AboutUsPage() {
               </span>
             </h2>
             <div className="flex flex-row gap-3 md:gap-6 justify-center items-center">
-              <a
+              <Link
                 href="/developers"
                 className="group relative px-6 py-4 md:px-12 md:py-7 bg-linear-to-r from-blue-600 via-cyan-600 to-sky-600 rounded-2xl font-black text-sm md:text-2xl shadow-2xl shadow-cyan-600/70 hover:shadow-cyan-500/90 transition-all duration-500 hover:scale-110 active:scale-95 overflow-hidden"
               >
@@ -229,14 +230,14 @@ export default function AboutUsPage() {
                   <span className="md:hidden">Developer</span>
                   <ArrowRight className="size-8 hidden md:block group-hover:translate-x-2 transition" />
                 </span>
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/book-service"
                 className="px-6 py-4 md:px-12 md:py-7 border-2 border-cyan-500 rounded-2xl font-bold  text-sm md:text-xl hover:bg-cyan-500/10 transition-all duration-300 hover:scale-105"
               >
                 Book <span className="hidden md:block">a Free Consultation</span>
                 <span className="md:hidden">Consult</span>
-              </a>
+              </Link>
             </div>
           </div>
         </section>

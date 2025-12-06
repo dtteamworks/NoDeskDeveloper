@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { API_BASE } from "@/lib/api";
+import Image from "next/image";
 
 export default function ProductDetailPage() {
   const { id } = useParams();
@@ -245,8 +246,10 @@ const handleSubmit = async (e) => {
             <div className="space-y-4">
               {/* Main Image */}
               <div className="relative group">
-                <img
+                <Image
                   src={product.screenshots[mainImage]}
+                  width={1920}
+                  height={1080}
                   alt={product.name}
                   className="w-full h-64 object-cover rounded-xl border border-slate-800 shadow-lg"
                 />
@@ -265,9 +268,11 @@ const handleSubmit = async (e) => {
                           : "border-slate-700 hover:border-slate-600"
                       }`}
                     >
-                      <img
+                      <Image
                         src={img}
-                        alt=""
+                        width={1920}
+                        height={1080}
+                        alt="jsd"
                         className="w-full h-full object-cover"
                       />
                     </button>

@@ -5,6 +5,7 @@
 import { useState, useEffect, useRef } from "react";
 import { CldUploadWidget } from "next-cloudinary";
 import { X, Upload, Trash2, Check, Loader2 } from "lucide-react";
+import Image from "next/image";
 
 export default function AddSoftwareModal({ isOpen, onClose, onAdd }) {
   const [formData, setFormData] = useState({
@@ -178,8 +179,10 @@ export default function AddSoftwareModal({ isOpen, onClose, onAdd }) {
                         key={index}
                         className="relative group rounded-xl overflow-hidden border-2 border-blue-500/50"
                       >
-                        <img
+                        <Image
                           src={url}
+                          width={1920}
+                          height={1080}
                           alt={`Screenshot ${index + 1}`}
                           className="w-full h-40 object-cover"
                         />

@@ -116,7 +116,7 @@ export default function FAQ() {
                 Still have questions?
               </h3>
               <p className="text-gray-300 mb-8 max-w-md mx-auto">
-                We're here 24/7 via WhatsApp, email, or call
+                We&#39;re here 24/7 via WhatsApp, email, or call
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link

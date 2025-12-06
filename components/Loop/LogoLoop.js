@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useCallback, useEffect, useMemo, useRef, useState, memo } from "react";
 
 const ANIMATION_CONFIG = {
@@ -335,7 +336,7 @@ export const LogoLoop = memo(
             {item.node}
           </span>
         ) : (
-          <img
+          <Image
             className={cx(
               "h-(--logoloop-logoHeight) w-auto block object-contain",
               "[-webkit-user-drag:none] pointer-events-none",

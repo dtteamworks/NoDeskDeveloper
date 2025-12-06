@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { X, Monitor, Smartphone, Copy, PlayCircle, Play } from "lucide-react";
+import Image from "next/image";
 
 export const ProductDialogBox = ({ product, isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -105,19 +106,23 @@ export const ProductDialogBox = ({ product, isOpen, onClose }) => {
         <div className="grid lg:grid-cols-2 gap-8 p-6 overflow-y-auto max-h-[75vh]">
           {/* Left Side - Product Info */}
           <div className="space-y-6">
-            <img
+            <Image
               key={"jj"}
               src={product.screenshots[0]}
-              alt=""
+              width={1920}
+              height={1080}
+              alt="sdaslkjj"
               className="rounded-xl object-cover w-full h-52 bg-slate-800"
             />
 
             <div className="grid grid-cols-3 gap-3">
               {product.screenshots.slice(0, 3).map((img, i) => (
-                <img
+                <Image
                   key={i}
                   src={img}
-                  alt=""
+                  width={1920}
+                  height={1080}
+                  alt="shdjiaokjh"
                   className="rounded-xl object-cover h-32 bg-slate-800"
                 />
               ))}
