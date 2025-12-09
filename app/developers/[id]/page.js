@@ -93,7 +93,7 @@ export default function DeveloperDetailClient() {
       projectType: formData.projectType,
       estimatedBudget: formData.budget,
       description: formData.description,
-      developerRate: `₹${convertINR(developer?.hourlyRate)}/hr`, // optional, just for display
+      developerRate: `₹${convertINR(developer?.hourlyRate)}/hr`|| `₹${developer?.hourlyRate}/hr`, // optional, just for display
       developer: {
         id: developer._id,
         name: developer.name,
@@ -264,7 +264,7 @@ export default function DeveloperDetailClient() {
                       <HiOutlineCash className="size-5 text-green-400" />
                     </div>
                     <p className="text-[16px] md:text-2xl font-bold text-white mb-1">
-                      ₹{developer.hourlyRate}
+                     {loading ? "......." : convertINR(developer?.hourlyRate) || `₹${developer?.hourlyRate}`}/hr
                     </p>
                     <p className="text-xs text-gray-400">Per Hour</p>
                   </div>
@@ -431,7 +431,7 @@ export default function DeveloperDetailClient() {
                   <div className="flex items-center justify-between py-3 px-4 bg-blue-500/10 border border-blue-500/20 rounded-xl">
                     <span className="text-xs text-gray-400">Hourly Rate</span>
                     <span className="text-sm font-bold text-blue-400">
-                      {loading ? "......." : convertINR(developer?.hourlyRate)}/hr
+                      {loading ? "......." : convertINR(developer?.hourlyRate) || `₹${developer?.hourlyRate}`}/hr
                     </span>
                   </div>
 
