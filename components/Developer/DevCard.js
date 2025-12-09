@@ -123,45 +123,20 @@ const DevCard = ({ filteredDevelopers }) => {
 
   const shareDeveloper = async (dev) => {
   if (!navigator.share) {
-    alert("Sharing not supported on this browser");
+    alert("Share not supported on this browser");
     return;
   }
 
-  const shareData = {
-    title: `${dev?.name} - ${dev?.level} Developer`,
-    text: `${dev?.level} Developer | ${dev?.experience}+ years experience | Available on Nodesk Developer`,
-    url: `https://www.nodeskdeveloper.com/developers/${dev?._id}`,
-  };
-
-  // Only try to add image if photo exists
-  if (dev?.photo) {
-    try {
-      const response = await fetch(dev.photo);
-      
-      if (!response.ok) throw new Error("Image fetch failed");
-
-      const blob = await response.blob();
-      const fileName = `developer-${dev._id}.jpg`;
-      const file = new File([blob], fileName, { type: blob.type || "image/jpeg" });
-
-      // Add files only if browser supports it
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        shareData.files = [file];
-      }
-      // Agar nahi support karta (jaise iOS), toh bina image ke share ho jaayega (fallback)
-    } catch (err) {
-      console.warn("Failed to fetch developer photo for sharing:", err);
-      // Proceed without image – no issue
-    }
-  }
-
   try {
-    await navigator.share(shareData);
+    await navigator.share({
+      title: `${dev?.name} - ${dev?.level} Developer (${dev?.experience}+ years exp)`,
+      text: `${dev?.level} Developer with ${dev?.experience}+ years experience. Skilled in ${dev.skills.slice(0, 3).join(", ")} and more.`,
+      url: `https://www.nodeskdeveloper.com/developers/${dev?._id}`,
+    });
   } catch (err) {
     if (err.name !== "AbortError") {
       console.error("Share failed:", err);
       // Optional: fallback alert
-      // alert("Unable to share. Try copying the link.");
     }
   }
 };
