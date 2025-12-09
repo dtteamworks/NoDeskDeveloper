@@ -22,24 +22,14 @@ export async function generateMetadata({ params }) {
 
     // Clean title & description
     const title = `${developer?.name} - ${developer?.level} Developer`;
-    // const cleanDescription = developer.bio
-    //   ? developer.bio
-    //       .replace(/<[^>]*>/g, "")
-    //       .replace(/\s+/g, " ")
-    //       .trim()
-    //       .slice(0, 20) + "..."
-    //   : "Experienced developer ready to build your next project at Nodesk Developer";
-
+  
     // Developer photo as image (agar nahi hai to fallback)
     const ogImage = developer?.photo || "/dev.webp";
 
     return {
       title,
-      // description: cleanDescription,
-
       openGraph: {
         title,
-        // description: cleanDescription,
         url: `https://www.nodeskdeveloper.com/developers/${id}`,
         siteName: "Nodesk Developer",
         images: [ogImage],
