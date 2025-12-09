@@ -3,7 +3,7 @@ import { API_BASE } from "@/lib/api";
 import React from "react";
 
 export async function generateMetadata({ params }) {
-  const { id } = params;
+  const { id } = await params;
 
   try {
     const res = await fetch(`${API_BASE}/developer/${id}`, {
