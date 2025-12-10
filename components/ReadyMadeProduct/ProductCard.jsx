@@ -14,7 +14,7 @@ const ProductCard = ({ filteredProducts }) => {
       await navigator.share({
         title: product.name,
         text: product.description?.replace(/<[^>]*>/g, "").slice(0, 100),
-        url: `https://www.nodeskdeveloper.com/softwares-readymade/${product._id}`,
+        url: `https://www.nodeskdeveloper.com/software/${product.slug}`,
       });
     } else {
       alert(`Share ${product.name}`);
