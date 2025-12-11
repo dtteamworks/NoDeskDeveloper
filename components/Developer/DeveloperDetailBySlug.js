@@ -205,7 +205,7 @@ useEffect(() => {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
           {/* Left Side - Same as before */}
           <div className="lg:col-span-3 space-y-6">
-            <div className="relative bg-gradient-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-xl border border-white/10 rounded-3xl p-8 overflow-hidden">
+            <div className="relative bg-linear-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-xl border border-white/10 rounded-3xl p-8 overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl" />
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
 
@@ -222,7 +222,7 @@ useEffect(() => {
                         className="object-cover w-full h-full"
                       />
                     </div>
-                    <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full p-2">
+                    <div className="absolute -bottom-2 -right-2 bg-linear-to-r from-blue-500 to-purple-500 rounded-full p-2">
                       <Sparkles className="size-3.5 text-white" />
                     </div>
                   </div>
