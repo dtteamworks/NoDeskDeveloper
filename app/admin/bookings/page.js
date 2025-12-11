@@ -133,7 +133,7 @@ export default function ServicesGrid() {
                         <h3 className="text-white font-semibold text-[14px] leading-tight">
                           {service.title}
                         </h3>
-                        <MousePointer2 className="size-5  text-cyan-400 opacity-0 group-hover:opacity-80 duration-300  group-hover:rotate-90 transition-all drop-shadow-blue-200 ease-in" />
+                        <MousePointer2 className="size-5 text-cyan-400 opacity-0 group-hover:opacity-80 duration-300  group-hover:rotate-90 transition-all drop-shadow-blue-200 ease-in" />
                       </div>
 
                       <div className="flex gap-3 items-center">

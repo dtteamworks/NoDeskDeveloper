@@ -1,83 +1,154 @@
-// /admin/bookings/page.js (Purana code replace kar do isse - ab logic context se aa raha hai)
 "use client";
-import { useUnseenCounts } from "@/src/context/UnseenCountsContext";
-import { MousePointer2 } from "lucide-react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import {
+  Calendar,
+  User,
+  Code,
+  AlertCircle,
+  CheckCircle,
+  Clock,
+  Sparkles,
+} from "lucide-react";
+import { API_BASE } from "@/lib/api";
 
-export default function ServicesGrid() {
+export default function AdminDevEnquires() {
   const router = useRouter();
-  const { newCounts, totalCounts, markAsSeen, loading, services } = useUnseenCounts();
+  const [enquiries, setEnquiries] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const handleCardClick = (service) => {
-    markAsSeen(service.id);
-    router.push(service.route);
+  useEffect(() => {
+    const fetchEnquiries = async () => {
+      try {
+        const response = await fetch(`${API_BASE}/enquiries`);
+        const data = await response.json();
+        if (data.success) {
+          setEnquiries(data.data);
+        } else {
+          setError("Failed to load enquiries");
+        }
+      } catch (err) {
+        setError("Network error");
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchEnquiries();
+  }, []);
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "Reviewed":
+        return "bg-blue-500/10 border-blue-500/20 text-blue-400";
+      case "Contacted":
+        return "bg-green-500/10 border-green-500/20 text-green-400";
+      case "Closed":
+        return "bg-purple-500/10 border-purple-500/20 text-purple-400";
+      default:
+        return "bg-yellow-500/10 border-yellow-500/20 text-yellow-400";
+    }
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block size-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+          <p className="text-white text-xl">Loading enquiries...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center text-red-400 text-xl">
+        {error}
+      </div>
+    );
+  }
 
   return (
     <>
-      <div className="border-b border-white/10 backdrop-blur-xl bg-white/2 flex justify-between items-start md:items-center *:py-[22px] *:px-6">
-        <div className="px-8 py-10">
-          <h1 className="text-2xl md:text-3xl font-black bg-linear-to-tl from-cyan-700 via-emerald-600 to-green-700 bg-clip-text text-transparent">
-            All Bookings
-          </h1>
-          <p className="text-gray-400 mt-1 text-xs md:text-sm flex">
-            Manage <span className="hidden md:block px-1">and showcase </span> all bookings
-          </p>
-        </div>
-      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {enquiries.map((enquiry) => (
+          <div
+            key={enquiry._id}
+            className="relative bg-linear-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-xl border border-white/10 rounded-3xl p-6 overflow-hidden hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-300"
+          >
+            {/* Glow Effects */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl" />
+            <div className="absolute bottom-0 left-0 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl" />
 
-      <div className="min-h-screen bg-black p-6 md:p-10">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.map((service) => {
-              const newCount = newCounts[service.id] ?? 0;
-              const total = totalCounts[service.id] ?? 0;
-              const hasNew = newCount > 0;
-
-              return (
-                <div
-                  key={service.id}
-                  onClick={() => handleCardClick(service)}
-                  className="relative group cursor-pointer transform transition-all duration-300 hover:scale-[1.02]"
-                >
-                  <div className="relative overflow-hidden rounded-3xl p-7 bg-linear-to-br from-slate-900/60 to-slate-950/60 border border-slate-800/50 backdrop-blur-xl shadow-2xl transition-all duration-500 hover:border-cyan-500/40 hover:shadow-cyan-500/10">
-                    <div className="absolute inset-0 bg-linear-to-br from-cyan-500/10 to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-
-                    <div className="relative z-10 flex flex-col">
-                      <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-white font-semibold text-[14px] leading-tight">
-                          {service.title}
-                        </h3>
-                        <MousePointer2 className="size-5 text-cyan-400 opacity-0 group-hover:opacity-80 transition-opacity duration-300 -rotate-12 group-hover:rotate-0" />
-                      </div>
-
-                      <div className="flex gap-3 items-center">
-                        <div className={`px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 text-[9px] h-fit font-semibold ${hasNew ? "hidden" : "text-cyan-400"} transition-colors`}>
-                          Total {total} {total === 1 ? "enquiry" : "enquiries"}
-                        </div>
-
-                        {hasNew && (
-                          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-500/20 border border-red-500/40 text-red-300 text-[9px] font-semibold ">
-                            <span className="relative flex h-2 w-2">
-                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                              <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
-                            </span>
-                            {newCount === 1 ? "1 NEW" : `${newCount} NEW`}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
+            <div className="relative space-y-4">
+              {/* Header */}
+              <div className="flex justify-between items-start">
+                <div>
+                  <h3 className="text-xl font-bold text-white mb-1">
+                    {enquiry.clientName}
+                  </h3>
+                  <p className="text-sm text-gray-400">Client</p>
                 </div>
-              );
-            })}
-          </div>
+                <span
+                  className={`px-3 py-1.5 rounded-full text-xs font-medium ${getStatusColor(
+                    enquiry.status
+                  )}`}
+                >
+                  {enquiry.status}
+                </span>
+              </div>
 
-          {loading && Object.keys(newCounts).length === 0 && (
-            <div className="text-center text-gray-500 py-12 text-sm">Loading latest updates...</div>
-          )}
-        </div>
+              {/* Developer Info */}
+              <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-4 py-3">
+                <Code className="size-5 text-purple-400" />
+                <div>
+                  <p className="text-sm text-white font-medium">
+                    {enquiry.developer.name}
+                  </p>
+                  <p className="text-xs text-gray-400">
+                    Developer ({enquiry.developer.level})
+                  </p>
+                </div>
+              </div>
+
+              {/* Project Quick Stats */}
+              <div className="grid grid-cols-1 gap-3">
+                <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-3">
+                  <p className="text-xs text-gray-400 mb-1">Project Type</p>
+                  <p className="text-sm text-white font-medium">
+                    {enquiry.projectType}
+                  </p>
+                </div>
+              </div>
+
+              {/* Date */}
+              <div className="flex items-center gap-2 text-sm text-gray-400">
+                <Calendar className="size-4" />
+                <span>{new Date(enquiry.createdAt).toLocaleDateString()}</span>
+              </div>
+
+              {/* View Details Button */}
+              <button
+                onClick={() =>
+                  router.push(`/admin/bookings/dev-enquiries/${enquiry?._id}`)
+                }
+                className="w-full py-3 bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-medium rounded-xl transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40"
+              >
+                View Details
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
+
+      {enquiries.length === 0 && (
+        <div className="text-center text-gray-400 mt-12">
+          <AlertCircle className="size-12 mx-auto mb-4" />
+          <p>No enquiries found</p>
+        </div>
+      )}
     </>
   );
 }
