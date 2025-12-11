@@ -75,17 +75,17 @@ export default function ReadyMadeSoftwarePage() {
               {[...Array(8)].map((_, i) => (
                 <div
                   key={i}
-                  className="h-5 w-16 bg-white/10 rounded-full animate-pulse"
+                  className="h-8 w-20 bg-white/10 rounded-full animate-pulse"
                 />
               ))}
             </div>
             <div className="relative">
-              <div className="h-8 bg-white/10 rounded-2xl animate-pulse" />
+              <div className="h-10 bg-white/10 rounded-xl animate-pulse" />
             </div>
           </div>
 
           {/* Showing count skeleton */}
-          <div className="my-12 ml-3">
+          <div className="my-6 ml-3">
             <div className="h-6 w-48 bg-gray-700 rounded-lg animate-pulse" />
           </div>
 
