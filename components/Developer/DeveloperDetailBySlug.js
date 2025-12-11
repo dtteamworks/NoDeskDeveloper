@@ -24,10 +24,53 @@ export default function DeveloperDetailBySlug() {
     description: "",
   });
 
+ // Openai states
+  const [estimatedHours, setEstimatedHours] = useState(null);
+  const [estimating, setEstimating] = useState(false);
+
+
   const projectTypes = [
     "Web App", "Mobile App", "E-commerce", "Landing Page",
     "Dashboard", "API Development", "Full Stack Project", "Other",
   ];
+
+  // Ye function description change pe call hoga
+const estimateHours = async (desc) => {
+  if (!desc || desc.length < 20) {
+    setEstimatedHours(null);
+    return;
+  }
+
+  setEstimating(true);
+  try {
+    const res = await fetch("/api/estimate-hours", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        description: desc,
+        projectType: formData.projectType || "General"
+      }),
+    });
+    const data = await res.json();
+    setEstimatedHours(data.hours);
+  } catch (err) {
+    console.error(err);
+    setEstimatedHours(null);
+  } finally {
+    setEstimating(false);
+  }
+};
+
+// handleInputChange me description ke liye debounce laga do (optional but smooth)
+useEffect(() => {
+  const timer = setTimeout(() => {
+    if (formData.description) {
+      estimateHours(formData.description);
+    }
+  }, 1000); // 1 sec delay
+
+  return () => clearTimeout(timer);
+}, [formData.description, formData.projectType]);
 
   // Fetch developer by SLUG
   useEffect(() => {
@@ -73,6 +116,10 @@ export default function DeveloperDetailBySlug() {
       alert("Please fill all fields");
       return;
     }
+    
+    const finalDescription = estimatedHours
+  ? `${formData.description}\n\n[AI Estimated Hours: ${estimatedHours}]`
+  : formData.description;
 
     const bookingData = {
       clientName: formData.clientName,
@@ -80,7 +127,7 @@ export default function DeveloperDetailBySlug() {
       phone: formData.phone,
       projectType: formData.projectType,
       estimatedBudget: formData.budget,
-      description: formData.description,
+      description: finalDescription,
       developerRate: `₹${convertINR(developer?.hourlyRate)}/hr`,
       developer: {
         id: developer._id,
@@ -381,6 +428,18 @@ export default function DeveloperDetailBySlug() {
                     required
                     className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 transition-all resize-none"
                   />
+                  {/* Add this just below textarea */}
+                    <div className="mt-2 p-3 bg-blue-500/10 border border-blue-500/30 rounded-xl text-center">
+                      {estimating ? (
+                        <span className="text-blue-400 text-sm">Estimating hours...</span>
+                      ) : estimatedHours ? (
+                        <span className="text-green-400 font-bold text-lg">
+                          Estimated: {estimatedHours} hours
+                        </span>
+                      ) : formData.description.length > 20 ? (
+                        <span className="text-gray-500 text-sm">AI will estimate soon...</span>
+                      ) : null}
+                    </div>
 
                   {/* Rate Display */}
                   <div className="flex items-center justify-between py-3 px-4 bg-blue-500/10 border border-blue-500/20 rounded-xl">
