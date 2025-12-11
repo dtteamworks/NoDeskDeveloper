@@ -4,6 +4,7 @@ import FloatingLinearOrb from "@/components/FloatingLinearOrb";
 import FooterComponent from "@/components/Footer";
 import FollowCursor from "@/components/MiniComponents/FollowCursor";
 import TawkToChat from "@/components/TawkToChat";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = {
   title: "NoDeskDeveloper - Connect, Build, Grow",
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`antialiased`}>
         <>
+          <Analytics />
           <Navbar />
           <FollowCursor />
           <FloatingLinearOrb />
