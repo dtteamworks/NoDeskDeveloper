@@ -5,8 +5,17 @@ import { API_BASE } from "@/lib/api";
 import ProductCard from "@/components/ReadyMadeProduct/ProductCard";
 
 const categories = [
-  "All", "Food", "Travel", "Fitness", "Real Estate",
-  "E-commerce", "Finance", "Education", "Healthcare", "Social", "Other"
+  "All",
+  "Food",
+  "Travel",
+  "Fitness",
+  "Real Estate",
+  "E-commerce",
+  "Finance",
+  "Education",
+  "Healthcare",
+  "Social",
+  "Other",
 ];
 
 export default function ReadyMadeSoftwarePage() {
@@ -36,11 +45,15 @@ export default function ReadyMadeSoftwarePage() {
 
   const filteredProducts = useMemo(() => {
     return products.filter((p) => {
-      const matchesCategory = selectedCategory === "All" || p.category === selectedCategory;
+      const matchesCategory =
+        selectedCategory === "All" || p.category === selectedCategory;
       const matchesSearch =
         p.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         p.description?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (Array.isArray(p.tech) && p.tech.some(t => t.toLowerCase().includes(searchTerm.toLowerCase())));
+        (Array.isArray(p.tech) &&
+          p.tech.some((t) =>
+            t.toLowerCase().includes(searchTerm.toLowerCase())
+          ));
 
       return matchesCategory && matchesSearch;
     });
@@ -48,8 +61,82 @@ export default function ReadyMadeSoftwarePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <p className="text-3xl font-bold text-blue-400 animate-pulse">Loading Apps...</p>
+      <div className="min-h-screen bg-black text-white pt-24 pb-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          {/* Hero skeleton */}
+          <div className="text-center mb-8 md:mb-12 space-y-4">
+            <div className="h-12 md:h-16 bg-gray-800 rounded-2xl w-3/4 mx-auto animate-pulse" />
+            <div className="h-6 md:h-8 bg-gray-800 rounded-xl w-1/2 max-w-2xl mx-auto animate-pulse" />
+          </div>
+
+          {/* Filter bar skeleton */}
+          <div className="bg-white/5 backdrop-blur-xl border border-blue-500/20 rounded-3xl p-5 md:p-6 space-y-6">
+            <div className="flex flex-wrap gap-3">
+              {[...Array(8)].map((_, i) => (
+                <div
+                  key={i}
+                  className="h-5 w-16 bg-white/10 rounded-full animate-pulse"
+                />
+              ))}
+            </div>
+            <div className="relative">
+              <div className="h-8 bg-white/10 rounded-2xl animate-pulse" />
+            </div>
+          </div>
+
+          {/* Showing count skeleton */}
+          <div className="my-12 ml-3">
+            <div className="h-6 w-48 bg-gray-700 rounded-lg animate-pulse" />
+          </div>
+
+          {/* Product cards skeleton */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-blue-500/20 animate-pulse" >
+                {/* Image */}
+                <div className="h-40 bg-gray-800" />
+
+                <div className="p-6 space-y-4">
+                  <div className="flex justify-between">
+                    <div className="h-5 bg-gray-700 rounded-lg w-2/3" />
+                    <div className="h-5 bg-gray-700 rounded-full w-14" />
+                  </div>
+
+                  <div className="h-4 bg-gray-700 rounded w-full" />
+                  {/* <div className="h-4 bg-gray-700 rounded w-4/5" /> */}
+
+                  <div className="flex gap-2">
+                    {[...Array(3)].map((_, j) => (
+                      <div
+                        key={j}
+                        className="h-5 w-16 bg-gray-700 rounded-lg"
+                      />
+                    ))}
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+                    {[...Array(4)].map((_, k) => (
+                      <div
+                        key={k}
+                        className="h-5 w-20 bg-gray-700 rounded-md"
+                      />
+                    ))}
+                  </div>
+
+                  <div className="pt-4 border-t border-gray-700 space-y-3">
+                    <div className="h-5 bg-gray-700 rounded-lg" />
+                    <div className="h-5 bg-gray-700 rounded-lg" />
+                  </div>
+
+                  <div className="flex gap-3">
+                    <div className="h-6 flex-1 bg-gray-700 rounded-xl" />
+                    <div className="h-6 flex-1 bg-gray-700 rounded-xl" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     );
   }
@@ -62,7 +149,8 @@ export default function ReadyMadeSoftwarePage() {
             Software & Ready-Made Apps
           </h1>
           <p className="mt-1 text-sm md:text-lg font-medium text-blue-300/90 max-w-4xl mx-auto leading-relaxed">
-            Launch your business in <span className="text-sky-400 font-bold">days</span>, not months.
+            Launch your business in{" "}
+            <span className="text-sky-400 font-bold">days</span>, not months.
             Fully tested • Production-ready • 100% Customizable
           </p>
         </div>
@@ -97,7 +185,11 @@ export default function ReadyMadeSoftwarePage() {
         </div>
 
         <div className="mb-12 ml-3 text-blue-300/70 text-sm font-medium">
-          Showing <span className="text-white font-bold">{filteredProducts.length}</span> products
+          Showing{" "}
+          <span className="text-white font-bold">
+            {filteredProducts.length}
+          </span>{" "}
+          products
         </div>
 
         <ProductCard filteredProducts={filteredProducts} />
@@ -107,7 +199,9 @@ export default function ReadyMadeSoftwarePage() {
             <div className="text-6xl font-black bg-linear-to-r from-blue-400 to-sky-400 bg-clip-text text-transparent">
               No Apps Found
             </div>
-            <p className="text-xl text-blue-300 mt-6">Try adjusting your search or filter</p>
+            <p className="text-xl text-blue-300 mt-6">
+              Try adjusting your search or filter
+            </p>
           </div>
         )}
       </div>
