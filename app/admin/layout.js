@@ -1,4 +1,5 @@
 "use client";
+import { UnseenCountsProvider } from "@/src/context/UnseenCountsContext";
 import { LayoutDashboard, Users, Package, CalendarDays, LogOut, Menu, X, } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -8,7 +9,6 @@ import { API_BASE } from "@/lib/api";
 export default function AdminLayout({ children }) {
   const pathname = usePathname();
   const router = useRouter();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const menuItems = [
     { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -162,7 +162,9 @@ export default function AdminLayout({ children }) {
 
         {/* Main Content */}
         <main className="flex-1 lg:ml-72 min-h-screen  lg:pt-0 pb-20 lg:pb-0">
-          <div className="">{children}</div>
+          <UnseenCountsProvider>
+            <div className="">{children}</div>
+          </UnseenCountsProvider>
         </main>
       </div>
     </div>
