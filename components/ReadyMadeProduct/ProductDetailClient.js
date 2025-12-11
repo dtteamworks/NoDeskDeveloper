@@ -39,7 +39,7 @@ export default function ProductDetailPage() {
           cache: "no-store",
         });
 
-        if (!res.ok) throw new Error("Failed to fetch");
+        if (!res.ok) throw new Error("Failed to fetch.");
 
         const result = await res.json();
 
