@@ -435,7 +435,7 @@ useEffect(() => {
                         <span className="text-blue-400 text-sm">Estimating hours...</span>
                       ) : estimatedHours ? (
                         <span className="text-green-400 font-bold text-[16px]">
-                          Estimated: {estimatedHours} hours
+                          Estimated Approximately: {estimatedHours} hours
                         </span>
                       ) : formData.description.length > 20 ? (
                         <span className="text-gray-500 text-sm">AI will estimate soon...</span>

@@ -70,7 +70,7 @@ export default function AdminCodeInstallBookingDetails() {
         method: "DELETE",
       });
       alert("Deleted successfully");
-      router.push("/admin/bookings/code-install-bookings");
+      router.push("/admin/bookings/CodeInstallBooking");
     } catch (err) {
       alert("Delete failed");
     } finally {
