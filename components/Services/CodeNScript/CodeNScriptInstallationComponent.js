@@ -2,12 +2,11 @@
 import { useState, useMemo, useEffect } from "react";
 import { Search } from "lucide-react";
 import CodeNScriptCard from "./CodeNScriptCard";
-import { sampleProducts } from "./Data";
+import { API_BASE } from "@/lib/api";
 
 const categories = [
   "All",
   "Automation",
-  "E-commerce",
   "Finance",
   "Education",
   "Healthcare",
@@ -21,16 +20,30 @@ export default function CodeNScriptInstallationComponent() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
 
+  
   useEffect(() => {
-    // Simulate fetch with hardcoded data
-    setProducts(sampleProducts);
-    setLoading(false);
-  }, []);
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/code-n-script-cards`);
+        const data = await res.json();
+        if (data.success) {
+          setProducts(data.data || []);
+        } else {
+          console.error("Failed to fetch products:", data.message);
+        }
+      } catch (err) {
+        console.error("Error fetching products:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);  
 
   const filteredProducts = useMemo(() => {
     return products.filter((p) => {
       const matchesCategory =
-        selectedCategory === "All" || p.category === selectedCategory;
+        selectedCategory === "All" || p.productType === selectedCategory;
       const matchesSearch =
         p.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         p.description?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -172,7 +185,7 @@ export default function CodeNScriptInstallationComponent() {
           scripts
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProducts.map((product) => (
             <CodeNScriptCard key={product._id} product={product} />
           ))}
