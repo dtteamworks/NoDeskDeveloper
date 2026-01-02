@@ -3,10 +3,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Code, Clock, Globe, Loader2, Link2, Languages, LanguagesIcon } from "lucide-react";
 import Link from "next/link";
+import { API_BASE } from "@/lib/api";
 
-export const API_BASE =
-  process.env.NEXT_PUBLIC_BASE_URL ||
-  "https://nodeskdevbackend.onrender.com/api";
 
 export default function AdminTechMaintenaceEnqs() {
   const [requests, setRequests] = useState([]);

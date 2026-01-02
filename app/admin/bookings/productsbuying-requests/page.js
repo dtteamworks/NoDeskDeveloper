@@ -4,18 +4,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import {
-  Calendar,
-  User,
-  IndianRupee,
-  Package,
-  AlertCircle,
-  Sparkles,
-} from "lucide-react";
-
-const API_BASE =
-  process.env.NEXT_PUBLIC_BASE_URL ||
-  "https://nodeskdevbackend.onrender.com/api";
+import { Calendar, User, IndianRupee, AlertCircle } from "lucide-react";
+import { API_BASE } from "@/lib/api";
 
 export default function AdminBuyProductEnquire() {
   const router = useRouter();

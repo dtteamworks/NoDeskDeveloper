@@ -1,7 +1,9 @@
 "use client";
 import { ArrowLeft, Code2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function CodeNScriptEnqsLayout({ children }) {
+  const router = useRouter()
   return (
     <div className="min-h-screen bg-black/90">
       <div className="">

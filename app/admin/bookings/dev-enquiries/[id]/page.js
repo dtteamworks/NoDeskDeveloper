@@ -126,7 +126,7 @@ export default function EnquiryDetail() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Enquiry Card */}
-          <div className="relative bg-gradient-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-xl border border-white/10 rounded-3xl p-8 overflow-hidden">
+          <div className="relative bg-linear-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-xl border border-white/10 rounded-3xl p-8 overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl" />
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
 
@@ -169,7 +169,7 @@ export default function EnquiryDetail() {
           </div>
 
           {/* Project & Status Card */}
-          <div className="relative bg-gradient-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-xl border border-white/10 rounded-3xl p-8 overflow-hidden">
+          <div className="relative bg-linear-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-xl border border-white/10 rounded-3xl p-8 overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl" />
 
@@ -214,7 +214,7 @@ export default function EnquiryDetail() {
                 <button
                   onClick={handleUpdateStatus}
                   disabled={updating || newStatus === enquiry.status}
-                  className={`w-full py-3 flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-xl transition-all shadow-lg ${
+                  className={`w-full py-3 flex items-center justify-center gap-2 bg-linear-to-r from-blue-600 to-purple-600 text-white font-medium rounded-xl transition-all shadow-lg ${
                     updating || newStatus === enquiry.status
                       ? "opacity-80 cursor-not-allowed"
                       : "hover:from-blue-500 hover:to-purple-500 shadow-blue-500/40"
@@ -222,7 +222,7 @@ export default function EnquiryDetail() {
                 >
                   {updating ? (
                     <>
-                      <div className="size-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <div className="size-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                       Updating...
                     </>
                   ) : (
@@ -238,13 +238,13 @@ export default function EnquiryDetail() {
               <button
                 onClick={handleDelete}
                 disabled={deleting}
-                className={`w-full py-3 flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-red-700 text-white font-medium rounded-xl transition-all shadow-lg ${
+                className={`w-full py-3 flex items-center justify-center gap-2 bg-linear-to-r from-red-600 to-red-700 text-white font-medium rounded-xl transition-all shadow-lg ${
                   deleting ? "opacity-80 cursor-not-allowed" : "hover:from-red-500 hover:to-red-600 shadow-red-500/40"
                 }`}
               >
                 {deleting ? (
                   <>
-                    <div className="size-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <div className="size-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                     Deleting...
                   </>
                 ) : (

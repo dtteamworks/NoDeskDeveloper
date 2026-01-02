@@ -83,8 +83,8 @@ export default function AdminProjectEstimationDetail() {
           <ArrowLeft className="w-5 h-5" /> Back to List
         </button>
 
-        <div className="bg-gradient-to-br from-slate-900/90 to-slate-950/90 border border-emerald-500/30 rounded-2xl p-8 shadow-2xl backdrop-blur-xl">
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent mb-8">
+        <div className="bg-linear-to-br from-slate-900/90 to-slate-950/90 border border-emerald-500/30 rounded-2xl p-8 shadow-2xl backdrop-blur-xl">
+          <h1 className="text-3xl font-bold bg-linear-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent mb-8">
             Project Estimation Request
           </h1>
 
@@ -125,7 +125,7 @@ export default function AdminProjectEstimationDetail() {
             <button
               onClick={handleUpdate}
               disabled={updating || status === estimate.status}
-              className="px-8 py-3 bg-gradient-to-r from-emerald-600 to-cyan-600 rounded-xl font-bold text-white flex items-center justify-center gap-2 disabled:opacity-50"
+              className="px-8 py-3 bg-linear-to-r from-emerald-600 to-cyan-600 rounded-xl font-bold text-white flex items-center justify-center gap-2 disabled:opacity-50"
             >
               {updating ? <Loader2 className="w-5 h-5 animate-spin" /> : <CheckCircle className="w-5 h-5" />}
               Update Status
@@ -134,7 +134,7 @@ export default function AdminProjectEstimationDetail() {
             <button
               onClick={handleDelete}
               disabled={deleting}
-              className="px-8 py-3 bg-gradient-to-r from-red-600 to-red-500 rounded-xl font-bold text-white flex items-center justify-center gap-2 disabled:opacity-50"
+              className="px-8 py-3 bg-linear-to-r from-red-600 to-red-500 rounded-xl font-bold text-white flex items-center justify-center gap-2 disabled:opacity-50"
             >
               {deleting ? <Loader2 className="w-5 h-5 animate-spin" /> : <Trash2 className="w-5 h-5" />}
               Delete Enquiry

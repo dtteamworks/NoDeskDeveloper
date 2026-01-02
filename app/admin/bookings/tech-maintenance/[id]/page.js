@@ -1,19 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
-import {
-  ArrowLeft,
-  Loader2,
-  Trash2,
-  CheckCircle,
-  MessageSquareCode,
-  LinkIcon,
-} from "lucide-react";
+import { ArrowLeft, Loader2, Trash2, CheckCircle, MessageSquareCode, LinkIcon, } from "lucide-react";
 import Link from "next/link";
-
-export const API_BASE =
-  process.env.NEXT_PUBLIC_BASE_URL ||
-  "https://nodeskdevbackend.onrender.com/api";
+import { API_BASE } from "@/lib/api";
 
 export default function AdminTechMaintenanceDetails() {
   const { id } = useParams();
