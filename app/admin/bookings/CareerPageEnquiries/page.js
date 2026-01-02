@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Mail, Phone, MapPin, Link, FileText, Briefcase, Loader2 } from "lucide-react";
 import { API_BASE } from "@/lib/api";
+import { showToast } from "nextjs-toast-notify";
 
 
 export default function AdminCareerEnquiries() {
@@ -18,7 +19,13 @@ export default function AdminCareerEnquiries() {
         const data = await res.json();
         setApplications(data.data || []);
       } catch (err) {
-        alert("Error loading career applications");
+        showToast.error("Error loading career applications", {
+            duration: 2000,
+            progress: true,
+            position: "top-right",
+            transition: "bounceIn",
+            sound: true,
+          });
       } finally {
         setLoading(false);
       }

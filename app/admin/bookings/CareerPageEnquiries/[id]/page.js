@@ -24,6 +24,7 @@ export default function AdminCareerDetail() {
         setStatus(data.data.status);
       } catch (err) {
         alert("Application not found");
+        
         router.push("/admin/bookings/CareerPageEnquiries");
       } finally {
         setLoading(false);

@@ -1,25 +1,6 @@
 "use client";
 import { useState } from "react";
-import {
-  AlertTriangle,
-  Zap,
-  Shield,
-  LifeBuoy,
-  Wrench,
-  FileText,
-  Database,
-  Globe,
-  Beaker,
-  CheckCircle,
-  TestTube,
-  Gauge,
-  Clock,
-  Phone,
-  MessageCircle,
-  HelpCircle,
-  ArrowRight,
-  Bug,
-} from "lucide-react";
+import { AlertTriangle, Zap, Shield, LifeBuoy, Wrench, FileText, Database, Globe, Beaker, CheckCircle, TestTube, Gauge, Clock, Phone, MessageCircle, HelpCircle, ArrowRight, Bug, } from "lucide-react";
 import ReportIssueModal from "@/components/Modals/ReportIssueModal";
 
 export default function ErrorsFixing() {

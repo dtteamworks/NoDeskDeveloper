@@ -8,6 +8,7 @@ import { CldUploadWidget } from "next-cloudinary";
 import { useParams, useRouter } from "next/navigation";
 import { API_BASE } from "@/lib/api";
 import { countrielsList } from "@/components/AdminPanel/Data";
+import { showToast } from "nextjs-toast-notify";
 
 export default function DeveloperDetailPage() {
   const { id } = useParams(); // ← yeh sahi tarika hai [id] folder se ID lene ka
@@ -30,15 +31,29 @@ export default function DeveloperDetailPage() {
           const devData = {
             ...result.data,
             skills: result.data.skills.join(", "),
-            preferredLanguage: Array.isArray(result.data.preferredLanguage) ? result.data.preferredLanguage.join(", ") : "",
+            preferredLanguage: Array.isArray(result.data.preferredLanguage)
+              ? result.data.preferredLanguage.join(", ")
+              : "",
           };
           setDeveloper(devData);
         } else {
-          alert("Developer not found");
+          showToast.warning("Developer not found", {
+            duration: 2000,
+            progress: true,
+            position: "top-right",
+            transition: "bounceIn",
+            sound: true,
+          });
         }
       } catch (err) {
         console.error(err);
-        alert("Failed to load developer");
+        showToast.error("Failed to load developer", {
+          duration: 2000,
+          progress: true,
+          position: "top-right",
+          transition: "bounceIn",
+          sound: true,
+        });
       } finally {
         setLoading(false);
       }
@@ -94,13 +109,33 @@ export default function DeveloperDetailPage() {
       const result = await res.json();
 
       if (result.success) {
-        alert("Developer updated successfully!");
-        router.back();
+        showToast.success("Developer updated successfully!", {
+          duration: 2000,
+          progress: true,
+          position: "top-right",
+          transition: "bounceIn",
+          sound: true,
+        });
+        setTimeout(() => {
+          router.back();
+        }, 2000);
       } else {
-        alert("Update failed: " + result.message);
+        showToast.warning("Update failed: " + result.message, {
+          duration: 2000,
+          progress: true,
+          position: "top-right",
+          transition: "bounceIn",
+          sound: true,
+        });
       }
     } catch (err) {
-      alert("Network error");
+      showToast.error("Network error", {
+        duration: 2000,
+        progress: true,
+        position: "top-right",
+        transition: "bounceIn",
+        sound: true,
+      });
     }
   };
 
@@ -114,11 +149,23 @@ export default function DeveloperDetailPage() {
       const result = await res.json();
 
       if (result.success) {
-        alert("Developer deleted!");
+        showToast.success("Developer deleted", {
+          duration: 2000,
+          progress: true,
+          position: "top-right",
+          transition: "bounceIn",
+          sound: true,
+        });
         window.location.href = "/admin/all-developers";
       }
     } catch (err) {
-      alert("Delete failed");
+      showToast.error("Delete failed", {
+        duration: 2000,
+        progress: true,
+        position: "top-right",
+        transition: "bounceIn",
+        sound: true,
+      });
     }
   };
 

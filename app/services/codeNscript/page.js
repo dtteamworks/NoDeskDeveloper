@@ -5,18 +5,15 @@ import {
   Server,
   Database,
   Smartphone,
-  FileCheck,
-  IndianRupee,
   ArrowRight,
   DownloadCloud,
-  CheckCircle,
 } from "lucide-react";
 import BookServiceModal from "@/components/Modals/BookServiceModal";
 import InstallOwnCodeModal from "@/components/Modals/InstallOwnCodeModal";
 import { languages, setupTypes, timeSlots } from "@/components/Modals/Data";
 import { API_BASE } from "@/lib/api";
-import Image from "next/image";
 import CodeNScriptInstallationComponent from "@/components/Services/CodeNScript/CodeNScriptInstallationComponent";
+import { showToast } from "nextjs-toast-notify";
 
 export default function CodeScriptInstallation() {
   const [isBookModalOpen, setIsBookModalOpen] = useState(false);
@@ -85,7 +82,17 @@ export default function CodeScriptInstallation() {
       const result = await res.json();
 
       if (res.ok) {
-        alert("Booking submitted successfully! We'll call you soon.");
+        showToast.success(
+          "Booking submitted successfully! We'll call you soon.",
+          {
+            duration: 2000,
+            progress: true,
+            position: "top-right",
+            transition: "bounceIn",
+            sound: true,
+          }
+        );
+
         setIsBookModalOpen(false);
 
         // Form reset
@@ -98,11 +105,23 @@ export default function CodeScriptInstallation() {
           brief: "",
         });
       } else {
-        alert("Error: " + (result.message || "Submission failed"));
+        showToast.warning("Error: " + (result.message || "Submission failed"), {
+          duration: 2000,
+          progress: true,
+          position: "top-right",
+          transition: "bounceIn",
+          sound: true,
+        });
       }
     } catch (err) {
       console.error("Submit error:", err);
-      alert("Network error! Please try again.");
+      showToast.error("Network error! Please try again.", {
+        duration: 2000,
+        progress: true,
+        position: "top-right",
+        transition: "bounceIn",
+        sound: true,
+      });
     }
   };
 
@@ -124,16 +143,23 @@ export default function CodeScriptInstallation() {
     try {
       const res = await fetch(`${API_BASE}/install-own-code`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
       const result = await res.json();
 
       if (res.ok) {
-        alert("Request submitted successfully! We'll contact you soon.");
+        showToast.success( "Request submitted successfully! We'll contact you soon.", 
+          {
+            duration: 2000,
+            progress: true,
+            position: "top-right",
+            transition: "bounceIn",
+            sound: true,
+          }
+        );
+
         setIsInstallModalOpen(false);
         setInstallForm({
           productLink: "",
@@ -144,25 +170,30 @@ export default function CodeScriptInstallation() {
           notes: "",
         });
       } else {
-        alert("Error: " + (result.message || "Something went wrong"));
+        showToast.warning(
+          "Error: " + (result.message || "Something went wrong"),
+          {
+            duration: 2000,
+            progress: true,
+            position: "top-right",
+            transition: "bounceIn",
+            sound: true,
+          }
+        );
       }
     } catch (err) {
       console.error(err);
-      alert("Network error! Please try again.");
+      showToast.success("Network error! Please try again.", {
+        duration: 2000,
+        progress: true,
+        position: "top-right",
+        transition: "bounceIn",
+        sound: true,
+      });
     }
   };
 
-  const requirements = [
-    { icon: Server, label: "Hosting/VPS Access" },
-    { icon: Database, label: "Database Access" },
-    { icon: Smartphone, label: "App Store Access" },
-  ];
 
-  const terms = [
-    "Valid purchase/license required",
-    "Customization billed separately",
-    "Server & domain access needed",
-  ];
 
   return (
     <>
@@ -171,27 +202,15 @@ export default function CodeScriptInstallation() {
         <div className="fixed inset-0 -z-10">
           <div className="absolute top-1/2 left-1/6 w-96 h-96 bg-violet-900/30 rounded-full blur-3xl animate-pulse"></div>
         </div>
-{/* 
-        <div className="max-w-6xl mx-auto px-6 pt-8 pb-6">
-          <header className="text-center">
-            <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold mb-3 md:mb-4 bg-linear-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              Code & Script Installation
-            </h1>
-            <p className="text-sm md:text-lg text-slate-300 max-w-2xl mx-auto">
-              Professional installation & configuration for web and mobile
-              applications
-            </p>
-          </header>
-        </div> */}
+        {/* 
 
-{/* =============================================================================================================================================== */}
-{/* =============================================================================================================================================== */}
+        {/* =============================================================================================================================================== */}
+        {/* =============================================================================================================================================== */}
 
-<CodeNScriptInstallationComponent />
+        <CodeNScriptInstallationComponent />
 
-
-{/* =============================================================================================================================================== */}
-{/* =============================================================================================================================================== */}
+        {/* =============================================================================================================================================== */}
+        {/* =============================================================================================================================================== */}
 
         {/* buttons */}
         <div className="flex flex-row sm:flex-row gap-2 md:gap-4 justify-center *:w-fit *:text-nowrap *:text-xs *:md:text-sm pt-8">

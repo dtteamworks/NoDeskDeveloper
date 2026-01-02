@@ -1,10 +1,10 @@
 "use client";
 import { UnseenCountsProvider, useUnseenCounts } from "@/src/context/UnseenCountsContext";
-import { LayoutDashboard, Users, Package, CalendarDays, LogOut, Menu, X, Computer, } from "lucide-react";
+import { LayoutDashboard, Users, Package, CalendarDays, LogOut, Computer, Check, } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
 import { API_BASE } from "@/lib/api";
+import { showToast } from "nextjs-toast-notify";
 
 function AdminLayoutContent({ children }) {
   const pathname = usePathname();
@@ -12,13 +12,21 @@ function AdminLayoutContent({ children }) {
   const { newCounts } = useUnseenCounts();
 
   // Calculate total new enquiries across all services
-  const totalNewEnquiries = Object.values(newCounts).reduce((sum, count) => sum + count, 0);
+  const totalNewEnquiries = Object.values(newCounts).reduce(
+    (sum, count) => sum + count,
+    0
+  );
 
   const menuItems = [
     { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
     { href: "/admin/all-developers", label: "All Developers", icon: Users },
     { href: "/admin/softwares", label: "Softwares", icon: Package },
-    { href: "/admin/bookings", label: "Bookings", icon: CalendarDays, showBadge: true },
+    {
+      href: "/admin/bookings",
+      label: "Bookings",
+      icon: CalendarDays,
+      showBadge: true,
+    },
     { href: "/admin/codeNscripts", label: "Code & Scripts", icon: Computer },
   ];
 
@@ -29,8 +37,16 @@ function AdminLayoutContent({ children }) {
         credentials: "include",
       });
       if (res.ok) {
-        alert("Logged Out Successfully");
-        router.push("/");
+        showToast.success("Logged Out Successfully", {
+          duration: 2000,
+          progress: true,
+          position: "top-right",
+          transition: "bounceIn",
+          sound: true,
+        });
+        setTimeout(() => {
+          router.push("/");
+        }, 2000);
       }
     } catch (error) {
       console.error("Logout error:", error);
